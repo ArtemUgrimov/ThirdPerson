@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Zombie/ZombieAI.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CharacterAnimatorController.cs" Line="31" Column="72" />
+      <File FileName="Assets/Scripts/Events/EventsList.cs" Line="45" Column="63" />
+      <File FileName="Assets/Scripts/Zombie/ZombieMovementController.cs" Line="37" Column="26" />
+      <File FileName="Assets/Scripts/Zombie/ZombieAI.cs" Line="41" Column="10" />
+      <File FileName="Assets/Scripts/FreeLookCam.cs" Line="115" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/artem/Projects/ThirdPerson/Assets/Scripts/Zombie/ZombieAI.cs" relfile="Assets/Scripts/Zombie/ZombieAI.cs" line="36" column="60" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.ThirdPerson PreferredExecutionTarget="Unity.Editor" />
+</Properties>
