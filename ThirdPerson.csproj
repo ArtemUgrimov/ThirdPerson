@@ -257,6 +257,7 @@
     <Compile Include="Assets\Scripts\Zombie\TriggedHandler.cs" />
     <Compile Include="Assets\Scripts\Zombie\ZombieAI.cs" />
     <Compile Include="Assets\Scripts\Zombie\ZombieAnimatorController.cs" />
+    <Compile Include="Assets\Scripts\Zombie\ZombieWeapon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -43,15 +43,6 @@ public static class EventsList {
     public static string PROCESS_DAMAGE_TO_TARGET = "damage_enemy";
     public static string UPDATE_OWNERS_DAMAGE = "owners_damage";
     public static string WEAPON_CHANGED = "weapon_changed";
-}
 
-public static class ZombieEvents {
-    public static string IDLE = "idle";
-    public static string WALK = "walk";
-    public static string RUN = "run";
-    public static string ATTACK = "attack";
-    public static string MOVE_DIR = "move_dir";
-    public static string SCREAM = "scream";
-    public static string DEATH = "death";
-    public static string GOT_HIT = "got_hit";
+	public static string UPDATE_CAMERA_TARGET = "update_camera_target";
 }

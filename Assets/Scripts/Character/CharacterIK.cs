@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterIK : MonoBehaviour {
+public class CharacterIK : NetworkBehaviour {
 
 	Animator animator;
 	public Transform lookObject;
@@ -55,7 +56,7 @@ public class CharacterIK : MonoBehaviour {
 	//}
 
     void OnAnimatorIK() {
-		if (lookObject != null) {
+		if (lookObject != null && isLocalPlayer) {
 			animator.SetLookAtWeight(1, 0.7f, 0.9f, 1.0f);
 			animator.SetLookAtPosition(lookObject.position);
 		}

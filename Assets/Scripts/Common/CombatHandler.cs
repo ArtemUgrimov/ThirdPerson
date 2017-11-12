@@ -35,6 +35,9 @@ public class CombatHandler : MonoBehaviour {
 	}
 
 	void UpdateTarget(object arg) {
+		if (arg == null)
+			return;
+		
 		GameObject target = arg as GameObject;
 		if (attackState == AttackState.Attacking) {
 			target.SendMessage("GotHit", damage);

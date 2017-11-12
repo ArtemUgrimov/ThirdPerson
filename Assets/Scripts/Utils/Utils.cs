@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Utils {
 	public static Transform GetSuperParent(Transform tf) {
 		Transform parent = tf.parent;
-		while (parent != null && parent.parent != null && parent.tag != "Environment") {
+		while (parent != null && parent.parent != null) {
 			parent = parent.parent;
 		}
 		return parent;

@@ -20,7 +20,7 @@ public class ZombieAI : MonoBehaviour {
 	State state;
 
 	[SerializeField]
-	float attackDistance = 1.0f;
+	float attackDistance = 0.5f;
 
 	Transform target;
 	Float angle = new Float();

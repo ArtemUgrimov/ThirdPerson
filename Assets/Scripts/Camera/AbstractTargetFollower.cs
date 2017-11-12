@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+
 public abstract class AbstractTargetFollower : MonoBehaviour
 {
     public enum UpdateType // The available methods of updating are:
@@ -11,7 +12,7 @@ public abstract class AbstractTargetFollower : MonoBehaviour
     }
 
     [SerializeField] protected Transform m_Target;            // The target object to follow
-    [SerializeField] private bool m_AutoTargetPlayer = true;  // Whether the rig should automatically target the player.
+	[SerializeField] private bool m_AutoTargetPlayer = false;  // Whether the rig should automatically target the player.
     [SerializeField] private UpdateType m_UpdateType;         // stores the selected update type
 
     protected Rigidbody targetRigidbody;

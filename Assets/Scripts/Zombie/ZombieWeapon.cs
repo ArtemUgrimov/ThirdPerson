@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainWeapon : MonoBehaviour {
+public class ZombieWeapon : MonoBehaviour {
 
 	[SerializeField]
 	int damage = 25;
@@ -18,7 +18,7 @@ public class MainWeapon : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Player") {
 			if (superParent != null) {
 				superParent.SendMessage("UpdateTarget", other.gameObject);
 			}
@@ -26,10 +26,12 @@ public class MainWeapon : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Player") {
 			if (superParent != null) {
 				//superParent.SendMessage("UpdateTarget", other.gameObject);
 			}
 		}
 	}
+	
+
 }
