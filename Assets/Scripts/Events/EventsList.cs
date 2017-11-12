@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Float
 {
-    public float value = 0.0f;
+    public float value;
+
+    public Float() {}
+    public Float(float f) {
+        value = f;
+    }
+
     public override string ToString()
     {
         return value.ToString();
@@ -16,31 +22,36 @@ public class Float
     }
 }
 
-public class Vec3
+class Damage
 {
-    public Vector3 value;
-    public override string ToString()
+    public Damage(int amnt, GameObject trgt)
     {
-        return value.ToString();
+        amount = amnt;
+        target = trgt;
     }
-    public static implicit operator Vector3(Vec3 v)
-    {
-        return v.value;
-    }
+    public int amount = 25;
+    [HideInInspector]
+    public GameObject target;
 }
 
 public static class EventsList {
     public static string EVENT_ANGLE_CHANGED = "angle_changed";
     public static string CAMERA_MOVED = "camera_moved";
     public static string ATTACK_END = "attack_end";
+
+    public static string WEAPON_REACHES_TARGET = "weapon_reaches_target";
+    public static string PROCESS_DAMAGE_TO_TARGET = "damage_enemy";
+    public static string UPDATE_OWNERS_DAMAGE = "owners_damage";
+    public static string WEAPON_CHANGED = "weapon_changed";
 }
 
 public static class ZombieEvents {
-    public static string AGGRO = "aggro";
+    public static string IDLE = "idle";
     public static string WALK = "walk";
     public static string RUN = "run";
     public static string ATTACK = "attack";
     public static string MOVE_DIR = "move_dir";
-    public static string STOP_WALK = "stop_walk";
-    public static string UPDATE_TARGET_DISTANCE = "target_dist";
+    public static string SCREAM = "scream";
+    public static string DEATH = "death";
+    public static string GOT_HIT = "got_hit";
 }
