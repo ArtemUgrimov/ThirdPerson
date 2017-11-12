@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Character\CharacterAnimatorController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterIK.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
+     <Compile Include="Assets\Scripts\Character\NewAttackController.cs" />
      <Compile Include="Assets\Scripts\Common\CombatHandler.cs" />
      <Compile Include="Assets\Scripts\Common\HealthController.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />

@@ -58,6 +58,7 @@ public class CharacterAnimatorController : NetworkBehaviour {
 	}
 
 	void HandleCombat() {
+		return;
 		if (Input.GetButtonDown("Fire1")) {
 			int newIndex = Random.Range(0, 7);
 			while (newIndex == lastAttackIndex)
