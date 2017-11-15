@@ -29,20 +29,37 @@ public class NewAttackController : NetworkBehaviour {
 				attackStopRoutine = null;
 			}
 
-			attacking = true;
 			string anim = GetRandomAttackAnim ();
 			Debug.Log (anim);
-			animator.CrossFade (anim, GetCrossfadeTime(), LAYER);
-			currentCoroutine = PlayAnim (CROSSFADE_TIME, anim);
+			float crossFadeTime = GetCrossfadeTime ();
+			animator.CrossFade (anim, crossFadeTime, LAYER);
+			currentCoroutine = PlayAnim (crossFadeTime, anim);
 			StartCoroutine (currentCoroutine);
+			attacking = true;
+			attackDone = false;
 		}
 	}
 
 	IEnumerator PlayAnim(float delta, string name) {
 		yield return new WaitForSeconds (delta);
-		animator.Play (name, LAYER, GetStartTime());
+
+		float maxWeight = 0;
+		AnimationClip clip = null;
+		foreach (var info in animator.GetCurrentAnimatorClipInfo(0)) {
+			if (info.weight > maxWeight) {
+				maxWeight = info.weight;
+				clip = info.clip;
+			}
+		}
+		if (clip != null) {
+			float len = clip.length;
+			float norm = (len - delta) / len;
+			Debug.Log (norm);
+			animator.Play (name, LAYER, norm);
+		} else {
+			animator.Play (name, LAYER, 0);
+		}
 		currentCoroutine = null;
-		attackDone = false;
 	}
 
 	IEnumerator AttackStop(float delta) {
@@ -52,7 +69,7 @@ public class NewAttackController : NetworkBehaviour {
 	}
 
 	float GetCrossfadeTime() {
-		return attacking ? CROSSFADE_TIME : CROSSFADE_TIME * 2.5f;
+		return attacking ? CROSSFADE_TIME : CROSSFADE_TIME;// * 1.5f;
 	}
 
 	float GetStartTime() {

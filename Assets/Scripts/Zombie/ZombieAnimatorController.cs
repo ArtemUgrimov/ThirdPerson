@@ -93,7 +93,7 @@ public class ZombieAnimatorController : MonoBehaviour {
         animator.SetBool(run_id, false);
         animator.SetBool(scream_id, false);
         animator.SetBool(got_hit_id, false);
-        animator.SetTrigger(death_id);
+        animator.SetBool(death_id, true);
     }
 
     void Hit()

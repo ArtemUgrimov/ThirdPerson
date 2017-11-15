@@ -18,12 +18,8 @@ public class CharacterAnimatorController : NetworkBehaviour {
 	int runningId = Animator.StringToHash("Running");
 	int movingId = Animator.StringToHash("Moving");
 
-	int combatId = Animator.StringToHash("Combat");
-	int attackIndexId = Animator.StringToHash("AttackAnimIndex");
-
 	bool isMoving;
 	float movingMagnitude;
-	int lastAttackIndex = -1;
 	float visionAngleDiff;
 
 	void Start() {
@@ -54,23 +50,6 @@ public class CharacterAnimatorController : NetworkBehaviour {
 		if (!isLocalPlayer)
 			return;
 		HandleMovement();
-		HandleCombat();
-	}
-
-	void HandleCombat() {
-		return;
-		if (Input.GetButtonDown("Fire1")) {
-			int newIndex = Random.Range(0, 7);
-			while (newIndex == lastAttackIndex)
-				newIndex = Random.Range(0, 7);
-			lastAttackIndex = newIndex;
-			animator.SetInteger(attackIndexId, newIndex);
-			netAnimator.SetTrigger(combatId);
-			if (isMoving) {
-				isMoving = false;
-				netAnimator.SetTrigger(movingId);
-			}
-		}
 	}
 
 	void HandleMovement() {
@@ -85,10 +64,12 @@ public class CharacterAnimatorController : NetworkBehaviour {
 
 		if (!isMoving && movingMagnitude > 0.1f) {
 			isMoving = true;
+			dodge = false;
 			animator.ResetTrigger("Dodge");
 			animator.SetBool(movingId, isMoving);
 		} else if (isMoving && movingMagnitude < 0.1f) {
 			isMoving = false;
+			dodge = false;
 			animator.ResetTrigger("Dodge");
 			animator.SetBool(runningId, false);
 			animator.SetBool(movingId, isMoving);

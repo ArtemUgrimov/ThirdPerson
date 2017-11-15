@@ -302,16 +302,40 @@ BlendTree:
     m_DirectBlendParameter: HorizontalAngle
     m_Mirror: 0
   - serializedVersion: 2
+    m_Motion: {fileID: 7400066, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
+    m_Threshold: 0.14285715
+    m_Position: {x: -0.1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAngle
+    m_Mirror: 0
+  - serializedVersion: 2
     m_Motion: {fileID: 7400064, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
-    m_Threshold: 0.33333334
+    m_Threshold: 0.2857143
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalAngle
     m_Mirror: 0
   - serializedVersion: 2
+    m_Motion: {fileID: 7400064, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
+    m_Threshold: 0.42857143
+    m_Position: {x: 0, y: -0.1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAngle
+    m_Mirror: 0
+  - serializedVersion: 2
     m_Motion: {fileID: 7400070, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
-    m_Threshold: 0.6666667
+    m_Threshold: 0.5714286
+    m_Position: {x: 0, y: 0.1}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAngle
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400070, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
+    m_Threshold: 0.71428573
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -319,8 +343,16 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400068, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
-    m_Threshold: 1
+    m_Threshold: 0.85714287
     m_Position: {x: 1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: HorizontalAngle
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400068, guid: bbc63157ab4790c43928f489ee9bd9d8, type: 3}
+    m_Threshold: 1
+    m_Position: {x: 0.1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalAngle
@@ -3240,7 +3272,7 @@ AnimatorState:
   - {fileID: 1101876846941474668}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -3249,7 +3281,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 206813421526073102}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: HorizontalAngle
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
