@@ -63,6 +63,11 @@
      <Compile Include="Assets\Scripts\Common\HealthController.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventsList.cs" />
+     <Compile Include="Assets\Scripts\Network\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Network\HostGame.cs" />
+     <Compile Include="Assets\Scripts\Network\MatchSettings.cs" />
+     <Compile Include="Assets\Scripts\Network\Player.cs" />
+     <Compile Include="Assets\Scripts\Network\PlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Test\TestAnimator.cs" />
      <Compile Include="Assets\Scripts\Utils\Utils.cs" />
      <Compile Include="Assets\Scripts\Weapons\MainWeapon.cs" />

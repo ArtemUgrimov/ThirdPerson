@@ -38,6 +38,7 @@ public class FreeLookCam : PivotBasedCameraRig {
 		m_TransformTargetRot = transform.localRotation;
 
 		m_Target = transform.parent;
+		transform.parent = null;
 
 		EventManager.StartListening(EventsList.UPDATE_CAMERA_TARGET, UpdateTarget);
 	}

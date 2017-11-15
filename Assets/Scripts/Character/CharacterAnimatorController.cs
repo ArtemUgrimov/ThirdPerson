@@ -47,8 +47,6 @@ public class CharacterAnimatorController : NetworkBehaviour {
 	}
 
 	void Update() {
-		if (!isLocalPlayer)
-			return;
 		HandleMovement();
 	}
 

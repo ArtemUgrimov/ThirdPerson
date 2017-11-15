@@ -1,28 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class HealthController : MonoBehaviour {
-
-	[SerializeField]
-	const int MAX_HEALTH = 100;
-
-	int health = 100;
-	bool dead = false;
-
-	void Start() {
-	}
+public class HealthController : NetworkBehaviour {
 
 	void GotHit(int amount) {
-		if (dead) {
-			return;
-		}
+		CmdGotHit (amount);
+	}
 
-		health -= amount;
-		health = Mathf.Clamp(health, 0, MAX_HEALTH);
-		if (health == 0) {
-			dead = true;
-			SendMessage("IAmDead");
-		}
+	[Command]
+	void CmdGotHit(int amount) {
+		Player player = GameManager.GetPlayer (transform.name);
+		player.RpcTakeDamage (amount);
 	}
 }
