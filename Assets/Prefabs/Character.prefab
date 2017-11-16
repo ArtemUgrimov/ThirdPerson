@@ -2843,6 +2843,7 @@ MonoBehaviour:
   - {fileID: 95105310107208918}
   playerUIPrefab: {fileID: 1788957686113584, guid: 219cb2ad38b64c54993406b262e8e994,
     type: 2}
+  playerUIInstance: {fileID: 0}
 --- !u!114 &114239546469702828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2872,7 +2873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95105310107208918}
-  m_ParameterSendBits: 959
+  m_ParameterSendBits: 14
   param0: 
   param1: 
   param2: 

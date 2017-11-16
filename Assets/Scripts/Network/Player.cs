@@ -22,9 +22,13 @@ public class Player : NetworkBehaviour {
 	Behaviour[] disableOnDeath;
 	bool[] wasEnabled;
 
+	bool firstSetup = true;
+
 	public void Setup () {
-		GameManager.instance.SetSceneCameraActive (false);
-		GetComponent<PlayerSetup> ().playerUIInstance.SetActive (true);
+		if (isLocalPlayer) {
+			GameManager.instance.SetSceneCameraActive (false);
+			GetComponent<PlayerSetup> ().playerUIInstance.SetActive (true);
+		}
 
 		CmdBroadcastNewPlayerSetup ();
 	}
@@ -36,9 +40,12 @@ public class Player : NetworkBehaviour {
 
 	[ClientRpc]
 	private void RpcSetupPlayerOnAllClients () {
-		wasEnabled = new bool[disableOnDeath.Length];
-		for (int i = 0; i < wasEnabled.Length; i++) {
-			wasEnabled [i] = disableOnDeath [i].enabled;
+		if (firstSetup) {
+			wasEnabled = new bool[disableOnDeath.Length];
+			for (int i = 0; i < wasEnabled.Length; i++) {
+				wasEnabled [i] = disableOnDeath [i].enabled;
+			}
+			firstSetup = false;
 		}
 		SetDefaults ();
 	}
@@ -94,13 +101,13 @@ public class Player : NetworkBehaviour {
 	IEnumerator Respawn () {
 		yield return new WaitForSeconds (GameManager.instance.matchSettings.respawnTime);
 
-		SetDefaults ();
-		GameManager.instance.SetSceneCameraActive (false);
-		GetComponent<PlayerSetup> ().playerUIInstance.SetActive (true);
-
 		Transform spawnPoint = NetworkManager.singleton.GetStartPosition ();
 		transform.position = spawnPoint.position;
 		transform.rotation = spawnPoint.rotation;
+
+		yield return new WaitForSeconds (0.1f);
+		Setup ();
+
 		Debug.Log (transform.name + " respawned");
 	}
 }

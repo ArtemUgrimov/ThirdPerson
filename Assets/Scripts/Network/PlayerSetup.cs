@@ -59,9 +59,11 @@ public class PlayerSetup : NetworkBehaviour {
 	}
 
 	void OnDisable () {
-		GameManager.instance.SetSceneCameraActive (true);
-		GameManager.UnregisterPlayer (transform.name);
 		RemoveUI ();
+		if (isLocalPlayer) {
+			GameManager.instance.SetSceneCameraActive (true);
+		}
+		GameManager.UnregisterPlayer (transform.name);
 	}
 
 	void DisableComponents () {
@@ -71,6 +73,7 @@ public class PlayerSetup : NetworkBehaviour {
 	}
 
 	void AssignRemotePlayer () {
-		gameObject.layer = LayerMask.NameToLayer (REMOTE_LAYER_NAME);
+//		gameObject.layer = LayerMask.NameToLayer (REMOTE_LAYER_NAME);
+		//TODO
 	}
 }
