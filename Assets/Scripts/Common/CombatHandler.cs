@@ -18,12 +18,12 @@ public enum AttackState {
 
 public class CombatHandler : MonoBehaviour {
 
-	WeaponType currentWeapon;
+	WeaponType currentWeapon = WeaponType.None;
 	AttackState attackState;
 
 	int damage = 25;
 
-	void OnAwake() {
+	void Awake() {
 		changeWeapon(WeaponType.Sword_Shield);
 	}
 

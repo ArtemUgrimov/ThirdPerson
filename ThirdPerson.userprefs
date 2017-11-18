@@ -1,15 +1,14 @@
-﻿<Properties StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|" StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Network\Player.cs">
+﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/NewAttackController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Network\Player.cs" Line="99" Column="66" />
-      <File FileName="Assets\Scripts\Network\PlayerSetup.cs" Line="21" Column="36" />
-      <File FileName="Assets\Scripts\Network\GameManager.cs" Line="24" Column="37" />
-      <File FileName="Assets\Scripts\Common\HealthController.cs" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\Character\CharacterAnimatorController.cs" Line="131" Column="7" />
-      <File FileName="Assets\Scripts\Network\MatchSettings.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/Network/PlayerSetup.cs" Line="40" Column="39" />
+      <File FileName="Assets/Scripts/Network/Player.cs" Line="119" Column="44" />
+      <File FileName="Assets/Scripts/Camera/CameraController.cs" Line="15" Column="23" />
+      <File FileName="Assets/Scripts/UI/Network/RoomListItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/NewAttackController.cs" Line="28" Column="67" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\Artem\Documents\ThirdPerson\Assets\Scripts\Character\CharacterSoundManager.cs" line="18" column="1" />

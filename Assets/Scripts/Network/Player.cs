@@ -62,6 +62,15 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
+	void GotHit(int amount) {
+		CmdGotHit(amount);
+	}
+
+	[Command]
+	void CmdGotHit(int amount) {
+		RpcTakeDamage(amount);
+	}
+
 	[ClientRpc]
 	public void RpcTakeDamage (int amount) {
 		if (isDead) {
@@ -95,17 +104,19 @@ public class Player : NetworkBehaviour {
 		}
 
 		Debug.Log (transform.name + " now dead");
-		StartCoroutine (Respawn ());
+		StartCoroutine (RespawnPlayer ());
 	}
 
-	IEnumerator Respawn () {
+	IEnumerator RespawnPlayer () {
 		yield return new WaitForSeconds (GameManager.instance.matchSettings.respawnTime);
 
+		SendMessage ("Respawn");
 		Transform spawnPoint = NetworkManager.singleton.GetStartPosition ();
+		Debug.Log(spawnPoint.position);
 		transform.position = spawnPoint.position;
 		transform.rotation = spawnPoint.rotation;
 
-		yield return new WaitForSeconds (0.1f);
+		//yield return new WaitForSeconds (0.1f);
 		Setup ();
 
 		Debug.Log (transform.name + " respawned");

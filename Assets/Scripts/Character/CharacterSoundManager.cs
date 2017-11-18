@@ -13,10 +13,10 @@ public class CharacterSoundManager : MonoBehaviour {
 	}
 
 	void FootDown() {
-		foreach (var clip in animator.GetCurrentAnimatorClipInfo(0)) {
-			if (clip.weight > 0.5f) {
-				AudioSource.PlayClipAtPoint (footsteps [Random.Range (0, footsteps.Count)], transform.position);
-			}
-		}
+//		foreach (var clip in animator.GetCurrentAnimatorClipInfo(0)) {
+//			if (clip.weight > 0.5f) {
+//				AudioSource.PlayClipAtPoint (footsteps [Random.Range (0, footsteps.Count)], transform.position);
+//			}
+//		}
 	}
 }

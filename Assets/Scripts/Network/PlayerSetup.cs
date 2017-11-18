@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(CharacterAnimatorController))]
+[RequireComponent(typeof(CameraController))]
 public class PlayerSetup : NetworkBehaviour {
 
 	public const string REMOTE_LAYER_NAME = "RemotePlayer";
@@ -32,10 +34,10 @@ public class PlayerSetup : NetworkBehaviour {
 
 	}
 
-	void SetLayerRecursively (GameObject playerGraphics, int layer)
+	void SetLayerRecursively (GameObject graphics, int layer)
 	{
-		playerGraphics.layer = layer;
-		foreach (Transform child in playerGraphics.transform) {
+		graphics.layer = layer;
+		foreach (Transform child in graphics.transform) {
 			SetLayerRecursively (child.gameObject, layer);
 		}
 	}

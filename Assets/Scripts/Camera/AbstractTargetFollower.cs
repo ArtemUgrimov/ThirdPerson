@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
-public abstract class AbstractTargetFollower : MonoBehaviour
+public abstract class AbstractTargetFollower : NetworkBehaviour
 {
     public enum UpdateType // The available methods of updating are:
     {

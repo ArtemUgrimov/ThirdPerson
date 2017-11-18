@@ -28,6 +28,7 @@ public class FreeLookCam : PivotBasedCameraRig {
 	Float camMoveAngle = new Float();
 
 	protected override void Awake() {
+
 		base.Awake();
 		// Lock or unlock the cursor.
 		Cursor.lockState = CursorLockMode.None;//m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;

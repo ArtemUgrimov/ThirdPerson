@@ -17,10 +17,14 @@ public class CharacterAnimatorController : NetworkBehaviour {
 	int horAngle = Animator.StringToHash("HorizontalAngle");
 	int runningId = Animator.StringToHash("Running");
 	int movingId = Animator.StringToHash("Moving");
+	int dodgeId = Animator.StringToHash("Dodge");
+	int dodgeFeatureId = Animator.StringToHash("Dodge_feature");
 
 	bool isMoving;
 	float movingMagnitude;
 	float visionAngleDiff;
+
+	IEnumerator dodgeCoroutine = null;
 
 	void Start() {
 		animator = GetComponent<Animator>();
@@ -56,21 +60,17 @@ public class CharacterAnimatorController : NetworkBehaviour {
 		float mouseX = Input.GetAxis("Mouse X");
 		float running = Input.GetAxis("Shift");
 
-		bool dodge = Input.GetButtonDown("Jump");
-
 		movingMagnitude = Mathf.Sqrt(horizontal * horizontal + vertical * vertical);
+		animator.ResetTrigger(dodgeId);
 
 		if (!isMoving && movingMagnitude > 0.1f) {
 			isMoving = true;
-			dodge = false;
-			animator.ResetTrigger("Dodge");
-			animator.SetBool(movingId, isMoving);
+			animator.SetBool (movingId, isMoving);
 		} else if (isMoving && movingMagnitude < 0.1f) {
 			isMoving = false;
-			dodge = false;
-			animator.ResetTrigger("Dodge");
-			animator.SetBool(runningId, false);
-			animator.SetBool(movingId, isMoving);
+			animator.SetBool (runningId, false);
+			animator.SetBool (movingId, isMoving);
+			animator.SetBool (dodgeFeatureId, false);
 		}
 
 		if (isMoving) {
@@ -83,10 +83,13 @@ public class CharacterAnimatorController : NetworkBehaviour {
 				Quaternion targetRot = Quaternion.Euler(0, visionAngleDiff, 0) * transform.rotation;
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 3);
 			}
-		}
-
-		if (dodge) {
-			netAnimator.SetTrigger("Dodge");
+			bool dodge = Input.GetButtonDown("Jump");
+			if (dodge) {
+				netAnimator.SetTrigger(dodgeId);
+				animator.SetBool (dodgeFeatureId, true);
+				dodgeCoroutine = ResetDodge ();
+				StartCoroutine (dodgeCoroutine);
+			}
 		}
 
 		animator.SetFloat(horizontalId, horizontal);
@@ -110,25 +113,18 @@ public class CharacterAnimatorController : NetworkBehaviour {
 			transform.Rotate(Vector3.up, angle);
 	}
 
-	void WeaponChanged(object info) {
-		if (!isLocalPlayer)
-			return;
-		WeaponType type = (WeaponType)info;
-		switch (type) {
-			case WeaponType.Axe:
-				animator.SetBool("Axe", true);
-				animator.SetBool("Sword", false);
-				break;
-			case WeaponType.Sword_Shield:
-				animator.SetBool("Axe", false);
-				animator.SetBool("Sword", true);
-				break;
-			case WeaponType.THSword:
-				break;
-		}
-	}
-
 	void IAmDead() {
 		netAnimator.SetTrigger("Dead");
 	}
+
+	void Respawn() {
+		netAnimator.SetTrigger("Respawn");
+	}
+
+	IEnumerator ResetDodge() {
+		yield return new WaitForSeconds (1.0f);
+		animator.SetBool (dodgeFeatureId, false);
+	}
+
+
 }

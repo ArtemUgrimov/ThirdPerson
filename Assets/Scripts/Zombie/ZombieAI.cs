@@ -198,7 +198,7 @@ public class ZombieAI : MonoBehaviour {
 		SetRagdoll(true);
 	}
 
-	public void GotHit(int amount) {
+	void GotHit(int amount) {
 		if (state == State.Dead)
 			return;
 		switchState(State.Hit);
