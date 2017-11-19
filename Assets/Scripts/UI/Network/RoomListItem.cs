@@ -15,6 +15,7 @@ public class RoomListItem : MonoBehaviour {
 	MatchInfoSnapshot match;
 
 	public void Setup (MatchInfoSnapshot matchInfo, JoinRoomDelegate joinCallback) {
+		Debug.Log("Found match " + matchInfo.name);
 		joinRoomCallback = joinCallback;
 		match = matchInfo;
 		roomNameText.text = match.name + " (" + match.currentSize + "/" + match.maxSize + ")";

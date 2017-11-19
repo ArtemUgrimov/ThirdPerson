@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(ZombieAnimatorController))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-public class ZombieAI : MonoBehaviour {
+public class ZombieAI : NetworkBehaviour {
 
 	enum State {
 		Idle,
@@ -191,6 +190,11 @@ public class ZombieAI : MonoBehaviour {
 	void IAmDead() {
 		if (state == State.Dead)
 			return;
+		RpcKillZombie();
+	}
+
+	[ClientRpc]
+	void RpcKillZombie() {
 		switchState(State.Dead);
 		SendMessage("Death");
 		GetComponent<ZombieAnimatorController>().enabled = false;

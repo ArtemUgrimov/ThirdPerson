@@ -31,8 +31,6 @@ public class CharacterAnimatorController : NetworkBehaviour {
 		netAnimator = GetComponent<NetworkAnimator>();
 
 		for (int i = 0; i < animator.parameterCount; ++i) {
-			if (animator.parameters[i].name.Contains("Weight"))
-				continue;
 			netAnimator.SetParameterAutoSend(i, true);
 		}
 

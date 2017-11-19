@@ -296,6 +296,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\AddTriggerScriptEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\CharacterSoundManagerEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\EditorExtentionEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
