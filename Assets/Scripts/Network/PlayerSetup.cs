@@ -17,11 +17,6 @@ public class PlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	Behaviour[] componentsToDisable;
 
-	[SerializeField]
-	GameObject playerUIPrefab;
-	[HideInInspector]
-	public GameObject playerUIInstance;
-
 	void Start () {
 		if (!isLocalPlayer) {
 			DisableComponents ();
@@ -31,7 +26,6 @@ public class PlayerSetup : NetworkBehaviour {
 			SetupUI ();
 			GetComponent<Player> ().Setup ();
 		}
-
 	}
 
 	void SetLayerRecursively (GameObject graphics, int layer)
@@ -43,12 +37,11 @@ public class PlayerSetup : NetworkBehaviour {
 	}
 
 	void SetupUI () {
-		playerUIInstance = Instantiate(playerUIPrefab);
-		playerUIInstance.name = playerUIPrefab.name;
+		PlayerUIController.ShowInGameUI();
 	}
 
 	void RemoveUI () {
-		Destroy (playerUIInstance);
+		PlayerUIController.ShowMenuUI();
 	}
 
 	public override void OnStartClient () {

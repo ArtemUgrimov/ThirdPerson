@@ -12,12 +12,12 @@ public class NewAttackController : NetworkBehaviour {
 
 	Animator animator;
 
-	void Start () {
+	void Awake () {
 		animator = GetComponent<Animator> ();
 	}
 
 	void Update() {
-		if (isLocalPlayer && Input.GetButtonDown("Fire1") && attackDone) {
+		if (isLocalPlayer && InputControl.GetButtonDown("Fire1") && attackDone) {
 			int index = Random.Range(0, 5);
 			animator.SetInteger(attackAnimIndexId, index);
 			animator.SetBool(combatId, true);

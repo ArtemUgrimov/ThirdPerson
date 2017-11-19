@@ -23,7 +23,7 @@ public class CombatHandler : MonoBehaviour {
 
 	int damage = 25;
 
-	void Awake() {
+	void Start() {
 		changeWeapon(WeaponType.Sword_Shield);
 	}
 

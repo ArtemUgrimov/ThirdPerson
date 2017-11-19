@@ -31,10 +31,10 @@ public class TestAnimator : MonoBehaviour {
 	}
 
 	void HandleInput() {
-		float horizontal = Input.GetAxis ("Horizontal");
-		float vertical = Input.GetAxis ("Vertical");
+		float horizontal = InputControl.GetAxis ("Horizontal");
+		float vertical = InputControl.GetAxis ("Vertical");
 		float magnitude = Mathf.Sqrt (horizontal * horizontal + vertical * vertical);
-		if (Input.GetButtonDown ("Fire1")) {
+		if (InputControl.GetButtonDown ("Fire1")) {
 			state = AnimatorState.Attacking;
 		} else if (state != AnimatorState.Attacking) {
 			if (Mathf.Abs (magnitude) > Mathf.Epsilon) {

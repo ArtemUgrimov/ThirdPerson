@@ -1,14 +1,13 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/CharacterAnimatorController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/NewAttackController.cs">
     <Files>
-      <File FileName="Assets/Scripts/UI/EditorExtention.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/Editor/EditorExtentionEditor.cs" Line="16" Column="1" />
-      <File FileName="Assets/Scripts/Editor/AddTriggerScriptEditor.cs" Line="6" Column="45" />
-      <File FileName="Assets/Scripts/Zombie/Zombie.cs" Line="14" Column="29" />
-      <File FileName="Assets/Scripts/Zombie/ZombieAI.cs" Line="202" Column="20" />
-      <File FileName="Assets/Scripts/Network/Player.cs" Line="22" Column="28" />
-      <File FileName="Assets/Scripts/Zombie/ZombieAnimatorController.cs" Line="87" Column="26" />
-      <File FileName="Assets/Scripts/Character/CharacterAnimatorController.cs" Line="27" Column="36" />
+      <File FileName="Assets/Scripts/Network/Player.cs" Line="10" Column="21" />
+      <File FileName="Assets/Scripts/UI/PlayerUIController.cs" Line="28" Column="12" />
+      <File FileName="Assets/Scripts/Common/InputControl.cs" Line="7" Column="69" />
+      <File FileName="Assets/Scripts/Character/NewAttackController.cs" Line="15" Column="12" />
+      <File FileName="Assets/Scripts/Network/PlayerSetup.cs" Line="44" Column="32" />
+      <File FileName="Assets/Scripts/Character/CharacterSoundManager.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scripts/Common/CombatHandler.cs" Line="26" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

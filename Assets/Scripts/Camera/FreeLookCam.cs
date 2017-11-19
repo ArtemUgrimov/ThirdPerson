@@ -14,7 +14,6 @@ public class FreeLookCam : PivotBasedCameraRig {
 	[SerializeField] private float m_TurnSmoothing = 0.0f;                // How much smoothing to apply to the turn input, to reduce mouse-turn jerkiness
 	[SerializeField] private float m_TiltMax = 75f;                       // The maximum value of the x axis rotation of the pivot.
 	[SerializeField] private float m_TiltMin = 45f;                       // The minimum value of the x axis rotation of the pivot.
-	[SerializeField] private bool m_LockCursor = false;                    // Whether the cursor should be hidden and locked.
 	[SerializeField] private bool m_VerticalAutoReturn = false;           // set wether or not the vertical axis should auto return
 
 	private float m_LookAngle;                    // The rig's y axis rotation.
@@ -24,15 +23,12 @@ public class FreeLookCam : PivotBasedCameraRig {
 	private Quaternion m_PivotTargetRot;
 	private Quaternion m_TransformTargetRot;
 
-	Float angle = new Float();
-	Float camMoveAngle = new Float();
+	private Float angle = new Float();
+	private Float camMoveAngle = new Float();
 
 	protected override void Awake() {
 
 		base.Awake();
-		// Lock or unlock the cursor.
-		Cursor.lockState = CursorLockMode.None;//m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;
-		Cursor.visible = true;//!m_LockCursor;
 		m_PivotEulers = m_Pivot.rotation.eulerAngles;
 
 		m_PivotTargetRot = m_Pivot.transform.localRotation;
@@ -56,10 +52,6 @@ public class FreeLookCam : PivotBasedCameraRig {
 
 	protected void Update() {
 		HandleRotationMovement();
-		if (m_LockCursor && Input.GetKey(KeyCode.Escape)) {
-			Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked);
-			Cursor.visible = !Cursor.visible;
-		}
 	}
 
 
@@ -81,8 +73,8 @@ public class FreeLookCam : PivotBasedCameraRig {
 			return;
 
 		// Read the user input
-		var x = Input.GetAxis("Mouse X");
-		var y = Input.GetAxis("Mouse Y");
+		var x = InputControl.GetAxis("Mouse X");
+		var y = InputControl.GetAxis("Mouse Y");
 
 		// Adjust the look angle by an amount proportional to the turn speed and horizontal input.
 		m_LookAngle += x * m_TurnSpeed;

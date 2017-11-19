@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CharacterSoundManager : MonoBehaviour {
 
-	[SerializeField]
-	List<AudioClip> footsteps = new List<AudioClip>();
-	Animator animator;
+	//[SerializeField]
+	//List<AudioClip> footsteps = new List<AudioClip>();
+	//Animator animator;
 
 	void Start() {
-		animator = GetComponent<Animator> ();
+		//animator = GetComponent<Animator> ();
 	}
 
 	void FootDown() {

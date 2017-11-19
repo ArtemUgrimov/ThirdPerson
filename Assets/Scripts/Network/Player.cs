@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class Player : NetworkBehaviour {
 
 	[SyncVar]
-	private bool isDead = false;
+	private bool isDead;
 	public bool IsDead {
 		get { return isDead; }
 		protected set { isDead = value; }
@@ -27,7 +27,6 @@ public class Player : NetworkBehaviour {
 	public void Setup () {
 		if (isLocalPlayer) {
 			GameManager.instance.SetSceneCameraActive (false);
-			GetComponent<PlayerSetup> ().playerUIInstance.SetActive (true);
 		}
 
 		CmdBroadcastNewPlayerSetup ();
@@ -100,7 +99,6 @@ public class Player : NetworkBehaviour {
 
 		if (isLocalPlayer) {
 			GameManager.instance.SetSceneCameraActive (true);
-			GetComponent<PlayerSetup> ().playerUIInstance.SetActive (false);
 		}
 
 		Debug.Log (transform.name + " now dead");

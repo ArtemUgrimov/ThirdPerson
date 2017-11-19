@@ -250,6 +250,7 @@
     <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
     <Compile Include="Assets\Scripts\Character\NewAttackController.cs" />
     <Compile Include="Assets\Scripts\Common\CombatHandler.cs" />
+    <Compile Include="Assets\Scripts\Common\Inputcontrol.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\Events\EventsList.cs" />
     <Compile Include="Assets\Scripts\Network\GameManager.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Assets\Scripts\Test\TestAnimator.cs" />
     <Compile Include="Assets\Scripts\UI\EditorExtention.cs" />
     <Compile Include="Assets\Scripts\UI\Network\RoomListItem.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerUIController.cs" />
     <Compile Include="Assets\Scripts\Utils\Utils.cs" />
     <Compile Include="Assets\Scripts\Weapons\MainWeapon.cs" />
     <Compile Include="Assets\Scripts\Zombie\AddTriggerScript.cs" />

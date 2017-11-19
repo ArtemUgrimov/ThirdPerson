@@ -53,10 +53,10 @@ public class CharacterAnimatorController : NetworkBehaviour {
 	}
 
 	void HandleMovement() {
-		float horizontal = Input.GetAxis("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
-		float mouseX = Input.GetAxis("Mouse X");
-		float running = Input.GetAxis("Shift");
+		float horizontal = InputControl.GetAxis("Horizontal");
+		float vertical = InputControl.GetAxis("Vertical");
+		float mouseX = InputControl.GetAxis("Mouse X");
+		float running = InputControl.GetAxis("Shift");
 
 		movingMagnitude = Mathf.Sqrt(horizontal * horizontal + vertical * vertical);
 		animator.ResetTrigger(dodgeId);
@@ -81,7 +81,7 @@ public class CharacterAnimatorController : NetworkBehaviour {
 				Quaternion targetRot = Quaternion.Euler(0, visionAngleDiff, 0) * transform.rotation;
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 3);
 			}
-			bool dodge = Input.GetButtonDown("Jump");
+			bool dodge = InputControl.GetButtonDown("Jump");
 			if (dodge) {
 				netAnimator.SetTrigger(dodgeId);
 				animator.SetBool (dodgeFeatureId, true);
