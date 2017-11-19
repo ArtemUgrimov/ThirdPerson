@@ -37,11 +37,11 @@ public class PlayerSetup : NetworkBehaviour {
 	}
 
 	void SetupUI () {
-		PlayerUIController.ShowInGameUI();
+		PlayerUIController.Instance().ShowInGameUI();
 	}
 
 	void RemoveUI () {
-		PlayerUIController.ShowMenuUI();
+		PlayerUIController.Instance().ShowMenuUI();
 	}
 
 	public override void OnStartClient () {
@@ -54,8 +54,8 @@ public class PlayerSetup : NetworkBehaviour {
 	}
 
 	void OnDisable () {
-		RemoveUI ();
 		if (isLocalPlayer) {
+			RemoveUI ();
 			GameManager.instance.SetSceneCameraActive (true);
 		}
 		GameManager.UnregisterPlayer (transform.name);

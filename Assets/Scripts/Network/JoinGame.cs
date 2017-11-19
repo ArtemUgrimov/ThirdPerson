@@ -17,7 +17,7 @@ public class JoinGame : MonoBehaviour {
 	[SerializeField]
 	Transform roomListParent;
 
-	void Start () {
+	void OnEnable () {
 		networkManager = NetworkManager.singleton;
 		if (networkManager.matchMaker == null) {
 			networkManager.StartMatchMaker ();

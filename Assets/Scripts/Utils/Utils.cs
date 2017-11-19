@@ -20,4 +20,30 @@ public static class Utils {
 		}
 		return parent;
 	}
+
+	public static void SetKinematic(Transform tf, bool val) {
+		Rigidbody rb = tf.GetComponent<Rigidbody>();
+		Collider col = tf.GetComponent<Collider>();
+		if (rb && col) {
+			rb.isKinematic = val;
+			col.isTrigger = val;
+		}
+
+		for (int i = 0; i < tf.childCount; ++i) {
+			SetKinematic(tf.GetChild(i), val);
+		}
+	}
+
+	public static void SetRagdoll(bool val, GameObject go) {
+		SetKinematic(go.transform, !val);
+
+		Collider col = go.GetComponent<Collider>();
+		col.isTrigger = val;
+
+		Rigidbody rb = go.GetComponent<Rigidbody>();
+		rb.isKinematic = val;
+
+		Animator animator = go.GetComponent<Animator>();
+		animator.enabled = !val;
+	}
 }

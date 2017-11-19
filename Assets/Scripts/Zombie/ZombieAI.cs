@@ -16,11 +16,13 @@ public class ZombieAI : NetworkBehaviour {
 		Dead
 	}
 
+	[SyncVar]
 	State state;
 
 	[SerializeField]
-	float attackDistance = 0.5f;
+	float attackDistance = 0.2f;
 
+	[SyncVar]
 	Transform target;
 	Float angle = new Float();
 
@@ -29,20 +31,7 @@ public class ZombieAI : NetworkBehaviour {
 	void Start() {
 		state = State.Idle;
 
-		SetRagdoll(false);
-	}
-
-	void SetKinematic(Transform tf, bool val) {
-		Rigidbody rb = tf.GetComponent<Rigidbody>();
-		Collider col = tf.GetComponent<Collider>();
-		if (rb && col) {
-			rb.isKinematic = val;
-			col.isTrigger = val;
-		}
-
-		for (int i = 0; i < tf.childCount; ++i) {
-			SetKinematic(tf.GetChild(i), val);
-		}
+		Utils.SetRagdoll(false, gameObject);
 	}
 
 	void Update() {
@@ -174,32 +163,19 @@ public class ZombieAI : NetworkBehaviour {
 		}
 	}
 
-	void SetRagdoll(bool val) {
-		SetKinematic(transform, !val);
-
-		Collider col = GetComponent<Collider>();
-		col.isTrigger = val;
-
-		Rigidbody rb = GetComponent<Rigidbody>();
-		rb.isKinematic = val;
-
-		Animator animator = GetComponent<Animator>();
-		animator.enabled = !val;
-	}
-
 	void IAmDead() {
 		if (state == State.Dead)
 			return;
 		RpcKillZombie();
 	}
 
-	[ClientRpc]
+	//[ClientRpc]
 	void RpcKillZombie() {
 		switchState(State.Dead);
 		SendMessage("Death");
 		GetComponent<ZombieAnimatorController>().enabled = false;
 		GetComponent<CapsuleCollider>().enabled = false;
-		SetRagdoll(true);
+		Utils.SetRagdoll(true, gameObject);
 	}
 
 	void GotHit(int amount) {

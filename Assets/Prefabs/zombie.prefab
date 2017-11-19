@@ -3213,7 +3213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d722801ed83d442e59d19baf6f39928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 2
+  attackDistance: 1
 --- !u!114 &114746824438553110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3258,6 +3258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66c1020327b24915af800be83837892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!114 &114922163898922386
 MonoBehaviour:
   m_ObjectHideFlags: 1

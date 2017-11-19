@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
 
 public enum MenuState {
 	InGame,
@@ -29,7 +31,10 @@ public class PlayerUIController : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		}
-		ShowInGameUI();
+	}
+
+	public static void Setup() {
+		instance.ShowInGameUI ();
 	}
 
 	void Update() {
@@ -38,7 +43,7 @@ public class PlayerUIController : MonoBehaviour {
 		}
 	}
 
-	public static void SwitchState() {
+	public void SwitchState() {
 		if (!Instance())
 			return;
 		switch (state) {
@@ -53,7 +58,7 @@ public class PlayerUIController : MonoBehaviour {
 		}
 	}
 
-	public static void ShowInGameUI() {
+	public void ShowInGameUI() {
 		if (!Instance())
 			return;
 		state = MenuState.InGame;
@@ -67,7 +72,7 @@ public class PlayerUIController : MonoBehaviour {
 			Instance().menuUI.SetActive(false);
 	}
 
-	public static void ShowMenuUI() {
+	public void ShowMenuUI() {
 		if (!Instance())
 			return;
 		state = MenuState.InMenu;
@@ -81,8 +86,13 @@ public class PlayerUIController : MonoBehaviour {
 			Instance().menuUI.SetActive(true);
 	}
 
-	public static void ExitGame() {
+	public void ExitGame() {
 		if (!Instance())
 			return;
+		NetworkManager nm = NetworkManager.singleton;
+		MatchInfo mi = nm.matchInfo;
+		nm.matchMaker.DropConnection (mi.networkId, mi.nodeId, 0, nm.OnDropConnection);
+		GameManager.instance.SetSceneCameraActive (false);
+		nm.StopHost ();
 	}
 }

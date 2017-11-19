@@ -24,4 +24,12 @@ public class Zombie : NetworkBehaviour
 			SendMessage("IAmDead");
 		}
 	}
+
+	public override void OnDeserialize(NetworkReader reader, bool initialState) {
+		try {
+			base.OnDeserialize (reader, initialState);
+		} catch (System.Exception e) {
+			Debug.LogError (e);
+		}
+	}
 }

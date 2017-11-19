@@ -113,10 +113,12 @@ public class CharacterAnimatorController : NetworkBehaviour {
 
 	void IAmDead() {
 		netAnimator.SetTrigger("Dead");
+		Utils.SetRagdoll(true, gameObject);
 	}
 
 	void Respawn() {
 		netAnimator.SetTrigger("Respawn");
+		Utils.SetRagdoll(false, gameObject);
 	}
 
 	IEnumerator ResetDodge() {

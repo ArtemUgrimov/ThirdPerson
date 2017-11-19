@@ -27,6 +27,7 @@ public class Player : NetworkBehaviour {
 	public void Setup () {
 		if (isLocalPlayer) {
 			GameManager.instance.SetSceneCameraActive (false);
+			PlayerUIController.Setup ();
 		}
 
 		CmdBroadcastNewPlayerSetup ();
@@ -114,9 +115,17 @@ public class Player : NetworkBehaviour {
 		transform.position = spawnPoint.position;
 		transform.rotation = spawnPoint.rotation;
 
-		//yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.05f);
 		Setup ();
 
 		Debug.Log (transform.name + " respawned");
+	}
+
+	public override void OnDeserialize(NetworkReader reader, bool initialState) {
+		try {
+			base.OnDeserialize (reader, initialState);
+		} catch (System.Exception e) {
+			Debug.LogError (e);
+		}
 	}
 }
