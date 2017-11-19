@@ -21,21 +21,21 @@ public static class Utils {
 		return parent;
 	}
 
-	public static void SetKinematic(Transform tf, bool val) {
+	public static void SetKinematic(Transform tf, bool val, string ignoreTag = "NONE") {
 		Rigidbody rb = tf.GetComponent<Rigidbody>();
 		Collider col = tf.GetComponent<Collider>();
-		if (rb && col) {
+		if (rb && col && tf.tag != ignoreTag) {
 			rb.isKinematic = val;
 			col.isTrigger = val;
 		}
 
 		for (int i = 0; i < tf.childCount; ++i) {
-			SetKinematic(tf.GetChild(i), val);
+			SetKinematic(tf.GetChild(i), val, ignoreTag);
 		}
 	}
 
-	public static void SetRagdoll(bool val, GameObject go) {
-		SetKinematic(go.transform, !val);
+	public static void SetRagdoll(bool val, GameObject go, string ignoreTag = "NONE") {
+		SetKinematic(go.transform, !val, ignoreTag);
 
 		Collider col = go.GetComponent<Collider>();
 		col.isTrigger = val;

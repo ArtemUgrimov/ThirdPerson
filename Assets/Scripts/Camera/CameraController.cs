@@ -11,12 +11,11 @@ public class CameraController : NetworkBehaviour {
 		}
 	}
 
-	void IAmDead() {
-		Debug.Log("DEEEEEEAD");
+	public void DeactivateCamera() {
 		cameraRef.SetActive (false);
 	}
 
-	void Respawn() {
+	public void ActivateCamera() {
 		cameraRef.SetActive (true);
 	}
 }

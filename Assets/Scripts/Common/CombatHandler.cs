@@ -39,7 +39,8 @@ public class CombatHandler : MonoBehaviour {
 			return;
 		
 		GameObject target = arg as GameObject;
-		if (attackState == AttackState.Attacking) {
+		var super = Utils.GetSuperParent (target.transform);
+		if (attackState == AttackState.Attacking && super != gameObject) {
 			target.SendMessage("GotHit", damage);
 		}
 	}

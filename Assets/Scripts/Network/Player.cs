@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(PlayerSetup))]
+[RequireComponent(typeof(CameraController))]
 public class Player : NetworkBehaviour {
 
 	[SyncVar]
@@ -26,7 +27,7 @@ public class Player : NetworkBehaviour {
 
 	public void Setup () {
 		if (isLocalPlayer) {
-			GameManager.instance.SetSceneCameraActive (false);
+			SetPlayerCamera ();
 			PlayerUIController.Setup ();
 		}
 
@@ -98,9 +99,7 @@ public class Player : NetworkBehaviour {
 			col.enabled = false;
 		}
 
-		if (isLocalPlayer) {
-			GameManager.instance.SetSceneCameraActive (true);
-		}
+		Invoke ("SetSceneCamera", GameManager.instance.matchSettings.respawnTime - 2.0f);
 
 		Debug.Log (transform.name + " now dead");
 		StartCoroutine (RespawnPlayer ());
@@ -127,5 +126,15 @@ public class Player : NetworkBehaviour {
 		} catch (System.Exception e) {
 			Debug.LogError (e);
 		}
+	}
+
+	void SetPlayerCamera() {
+		GameManager.instance.SetSceneCameraActive (false);
+		GetComponent<CameraController> ().ActivateCamera ();
+	}
+
+	void SetSceneCamera() {
+		GameManager.instance.SetSceneCameraActive (true);
+		GetComponent<CameraController> ().DeactivateCamera ();
 	}
 }
