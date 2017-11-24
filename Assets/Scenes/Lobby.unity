@@ -149,7 +149,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1571040931331524, guid: e238e781be32642beab738ba6123c152,
+  m_PlayerPrefab: {fileID: 1410087751776430, guid: 38284bb90e9884648983da8ed57640dc,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
@@ -376,12 +376,12 @@ Prefab:
     - target: {fileID: 224702317121178312, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 507.5
+      value: 539
       objectReference: {fileID: 0}
     - target: {fileID: 224702317121178312, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 285.5
+      value: 283
       objectReference: {fileID: 0}
     - target: {fileID: 224702317121178312, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
@@ -594,7 +594,7 @@ Prefab:
     - target: {fileID: 224922526101309738, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -40.000015
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 224719153558475138, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}

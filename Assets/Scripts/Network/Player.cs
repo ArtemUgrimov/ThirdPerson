@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(PlayerSetup))]
 [RequireComponent(typeof(CameraController))]
 public class Player : NetworkBehaviour {
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NewAttackController : NetworkBehaviour {
+public class AttackController : NetworkBehaviour {
 
 	static int combatId = Animator.StringToHash("Combat");
 	static int attackAnimIndexId = Animator.StringToHash("AttackAnimIndex");
@@ -11,6 +11,7 @@ public class NewAttackController : NetworkBehaviour {
 	bool attackDone = true;
 
 	Animator animator;
+	IEnumerator endCoroutine = null;
 
 	void Awake () {
 		animator = GetComponent<Animator> ();
@@ -18,12 +19,25 @@ public class NewAttackController : NetworkBehaviour {
 
 	void Update() {
 		if (isLocalPlayer && InputControl.GetButtonDown("Fire1") && attackDone) {
-			int index = Random.Range(0, 5);
+			int index = 0;//Random.Range(0, 5);
 			animator.SetInteger(attackAnimIndexId, index);
 			animator.SetBool(combatId, true);
 
+			if (endCoroutine != null) {
+				StopCoroutine(endCoroutine);
+			}
+			endCoroutine = AttackDone(0.50f);
+			StartCoroutine(endCoroutine);
+
 			attackDone = false;
 		}
+	}
+
+	IEnumerator AttackDone(float time) {
+		yield return new WaitForSeconds(time);
+		animator.SetBool(combatId, false);
+		attackDone = true;
+		endCoroutine = null;
 	}
 
 	void SendEvent(string ev) {
