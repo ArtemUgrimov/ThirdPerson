@@ -32,4 +32,10 @@ public class TriggedHandler : MonoBehaviour {
 			parent.gameObject.SendMessage("GotHit", dmg);
 		}
 	}
+
+	void GotKick(Vector3 worldDirection) {
+		if (parent) {
+			parent.gameObject.SendMessage("GotKick", worldDirection);
+		}
+	}
 }

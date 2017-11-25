@@ -8,14 +8,19 @@ public class CameraController : NetworkBehaviour {
 	void Start () {
 		if (!isLocalPlayer) {
 			Destroy (cameraRef);
+			cameraRef = null;
 		}
 	}
 
 	public void DeactivateCamera() {
-		cameraRef.SetActive (false);
+		if (cameraRef != null) {
+			cameraRef.SetActive (false);
+		}
 	}
 
 	public void ActivateCamera() {
-		cameraRef.SetActive (true);
+		if (cameraRef != null) {
+			cameraRef.SetActive (true);
+		}
 	}
 }

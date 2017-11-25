@@ -101,11 +101,11 @@
      <Compile Include="Assets\Scripts\Camera\FreeLookCam.cs" />
      <Compile Include="Assets\Scripts\Camera\PivotBasedCameraRig.cs" />
      <Compile Include="Assets\Scripts\Camera\ProtectCameraFromWallClip.cs" />
+     <Compile Include="Assets\Scripts\Character\AttackController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterAnimatorController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterIK.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
-     <Compile Include="Assets\Scripts\Character\NewAttackController.cs" />
-     <Compile Include="Assets\Scripts\Common\CombatHandler.cs" />
+     <Compile Include="Assets\Scripts\Character\CombatAnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Common\InputControl.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventsList.cs" />

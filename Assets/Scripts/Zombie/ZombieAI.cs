@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(ZombieAnimatorController))]
@@ -25,6 +26,8 @@ public class ZombieAI : NetworkBehaviour {
 	[SyncVar]
 	Transform target;
 	Float angle = new Float();
+
+	MainWeapon mainWeapon;
 
 	double currentStateTime = 0;
 
@@ -81,6 +84,18 @@ public class ZombieAI : NetworkBehaviour {
 				}
 				break;
 		}
+	}
+
+	void UpdateWeapon(MainWeapon weapon) {
+		mainWeapon = weapon;
+	}
+
+	void AttackBegin() {
+		mainWeapon.Attacking = true;
+	}
+
+	void AtatckEnd() {
+		mainWeapon.Attacking = false;
 	}
 
 	public void OnTriggerEnter(Collider other) {
@@ -183,5 +198,21 @@ public class ZombieAI : NetworkBehaviour {
 			return;
 		switchState(State.Hit);
 		SendMessage("Hit");
+	}
+
+	void GotKick(Vector3 worldDirection) {
+		GetComponent<ZombieAnimatorController>().enabled = false;
+		GetComponent<CapsuleCollider>().enabled = false;
+		Utils.SetRagdoll(true, gameObject);
+		GetComponent<Rigidbody> ().AddForce (worldDirection, ForceMode.Impulse);
+		StartCoroutine (WakeUp (2.0f));
+	}
+
+	IEnumerator WakeUp(float delay) {
+		yield return new WaitForSeconds (delay);
+
+		GetComponent<ZombieAnimatorController>().enabled = true;
+		GetComponent<CapsuleCollider>().enabled = true;
+		Utils.SetRagdoll(false, gameObject);
 	}
 }
