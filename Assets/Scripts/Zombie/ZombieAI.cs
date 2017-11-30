@@ -14,7 +14,8 @@ public class ZombieAI : NetworkBehaviour {
 		Attacking,
 		Running,
 		Hit,
-		Dead
+		Dead,
+		Stun
 	}
 
 	[SyncVar]
@@ -41,7 +42,7 @@ public class ZombieAI : NetworkBehaviour {
 		if (state == State.Dead)
 			return;
 
-		if (target != null) {
+		if (target != null && state != State.Stun) {
 			Vector3 direction = target.position - transform.position;
 			direction.y = 0;
 			Quaternion toRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), 360);
@@ -53,13 +54,21 @@ public class ZombieAI : NetworkBehaviour {
 		currentStateTime += Time.deltaTime;
 
 		switch (state) {
-			case State.Idle:
+		case State.Idle:
+				if (target != null) {
+					runToTarget ();
+					break;
+				}
 				if (currentStateTime >= 5) {
 					switchState(State.Walking);
 					SendMessage("Walk");
 				}
 				break;
 			case State.Walking:
+				if (target != null) {
+					runToTarget ();
+					break;
+				}
 				if (currentStateTime >= 5) {
 					switchState(State.Idle);
 					SendMessage("Idle");
@@ -201,18 +210,33 @@ public class ZombieAI : NetworkBehaviour {
 	}
 
 	void GotKick(Vector3 worldDirection) {
-		GetComponent<ZombieAnimatorController>().enabled = false;
+		if (state == State.Dead)
+			return;
+//		GetComponent<ZombieAnimatorController>().enabled = false;
 		GetComponent<CapsuleCollider>().enabled = false;
 		Utils.SetRagdoll(true, gameObject);
-		GetComponent<Rigidbody> ().AddForce (worldDirection, ForceMode.Impulse);
+
+		GetComponent<RagdollHelper> ().ragdolled = true;
+		Animator anim = GetComponent<Animator> ();
+		anim.GetBoneTransform(HumanBodyBones.Hips).GetComponent<Rigidbody>().AddForce (worldDirection, ForceMode.Impulse);
+
 		StartCoroutine (WakeUp (2.0f));
+		state = State.Stun;
 	}
 
 	IEnumerator WakeUp(float delay) {
 		yield return new WaitForSeconds (delay);
+		if (state != State.Dead) {
+			Debug.Log ("Woke UP!");
+			GetComponent<CapsuleCollider> ().enabled = true;
+			Utils.SetRagdoll (false, gameObject);
+			GetComponent<RagdollHelper> ().ragdolled = false;
+		}
+	}
 
-		GetComponent<ZombieAnimatorController>().enabled = true;
-		GetComponent<CapsuleCollider>().enabled = true;
-		Utils.SetRagdoll(false, gameObject);
+	void SendEvent(string name) {
+		if (name == "wokeUp") {
+			state = State.Idle;
+		}
 	}
 }

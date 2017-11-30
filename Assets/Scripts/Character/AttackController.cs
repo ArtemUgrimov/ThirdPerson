@@ -23,22 +23,32 @@ public class AttackController : NetworkBehaviour {
 	}
 
 	void Update() {
-		if (isLocalPlayer && InputControl.GetButtonDown("Fire1") && attackDone) {
-			int index = 0;//Random.Range(0, 5);
-			animator.SetInteger(attackAnimIndexId, index);
-			if (NeedKick ()) {
-				animator.SetBool (kickId, true);
-			} else {
+		if (isLocalPlayer) {
+
+			if (InputControl.GetButtonDown ("Fire1") && attackDone) {
+				int index = 0;//Random.Range(0, 5);
+				animator.SetInteger (attackAnimIndexId, index);
 				animator.SetBool (combatId, true);
 				mainWeapon.Attacking = true;
 				attackDone = false;
+				if (endCoroutine != null) {
+					StopCoroutine (endCoroutine);
+				}
+				endCoroutine = AttackDone (0.50f);
+				StartCoroutine (endCoroutine);
 			}
-			if (endCoroutine != null) {
-				StopCoroutine(endCoroutine);
+			if (InputControl.GetButtonDown ("Fire2")) {
+				if (NeedKick ()) {
+					animator.SetBool (kickId, true);
+					StartCoroutine (KickDone(0.2f));
+				}
 			}
-			endCoroutine = AttackDone(0.50f);
-			StartCoroutine(endCoroutine);
 		}
+	}
+
+	IEnumerator KickDone(float time) {
+		yield return new WaitForSeconds(time);
+		animator.SetBool (kickId, false);
 	}
 
 	IEnumerator AttackDone(float time) {
