@@ -1,15 +1,12 @@
-﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character\AttackController.cs">
+﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/CharacterControls.cs">
     <Files>
-      <File FileName="Assets\Scripts\Character\AttackController.cs" Line="77" Column="24" />
-      <File FileName="Assets\Scripts\Camera\CameraController.cs" Line="11" Column="21" />
-      <File FileName="Assets\Scripts\Weapons\MainWeapon.cs" Line="16" Column="24" />
-      <File FileName="Assets\Scripts\Zombie\ZombieWeapon.cs" Line="16" Column="1" />
-      <File FileName="Assets\Scripts\Zombie\TriggedHandler.cs" Line="38" Column="61" />
-      <File FileName="Assets\Scripts\Zombie\ZombieAI.cs" Line="207" Column="75" />
+      <File FileName="Assets/Scripts/Character/CharacterControls.cs" Line="80" Column="39" />
+      <File FileName="Assets/Scripts/Camera/CameraControls.cs" Line="22" Column="29" />
+      <File FileName="Assets/Scripts/Common/Inputcontrol.cs" Line="20" Column="56" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

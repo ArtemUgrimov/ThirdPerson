@@ -27,7 +27,7 @@ public class MainWeapon : MonoBehaviour {
 		Transform superTrans = Utils.GetSuperParent(transform);
 		if (superTrans != null) {
 			superParent = superTrans.gameObject;
-			superParent.SendMessage("UpdateWeapon", this);
+			superParent.SendMessage("UpdateWeapon", this, SendMessageOptions.DontRequireReceiver);
 		}
 	}
 

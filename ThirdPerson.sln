@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdPerson", "ThirdPerson.csproj", "{9C335827-BB19-5725-9409-A47A25D59F5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThirdPerson.Editor", "ThirdPerson.Editor.csproj", "{8D69EF17-BDE7-EFDD-4253-F7F15A2C21C6}"
