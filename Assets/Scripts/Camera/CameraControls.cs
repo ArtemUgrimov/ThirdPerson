@@ -48,7 +48,7 @@ public class CameraControls : MonoBehaviour {
 		cam = pivot.GetChild(0);
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		float h = InputControl.GetAxis("Mouse X");
 		float v = InputControl.GetAxis("Mouse Y");
 
@@ -57,7 +57,7 @@ public class CameraControls : MonoBehaviour {
 	}
 
 	private void FollowTarget() {
-		Vector3 targetPos = Vector3.Lerp(transform.position, target.position, Time.deltaTime * followSpeed);
+		Vector3 targetPos = Vector3.Lerp(transform.position, target.position, Time.fixedDeltaTime * followSpeed);
 		transform.position = targetPos;
 	}
 

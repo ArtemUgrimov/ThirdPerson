@@ -24,6 +24,12 @@ public class CharacterControls : MonoBehaviour {
 	private Vector3 moveDir;
 	private float moveAmount;
 
+	private int ignoreLayers = ~(1 << 8);
+
+	public bool Grounded {
+		get;
+		private set;
+	}
 
 	private void Start() {
 		SetupAnimator();
@@ -49,18 +55,21 @@ public class CharacterControls : MonoBehaviour {
 	private void Update() {
 		horizontal = InputControl.GetAxis("Horizontal");
 		vertical = InputControl.GetAxis("Vertical");
+	}
 
-		Vector3 v = vertical * cam.transform.forward;
-		Vector3 h = horizontal * cam.transform.right;
-		moveDir = (v + h).normalized;
-		float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-		moveAmount = Mathf.Clamp01(m);
-
+	private void FixedUpdate() {
 		UpdateMovement();
+		HandleMovementAnimations();
 	}
 
 	private void UpdateMovement() {
-		body.drag = (moveAmount > Mathf.Epsilon ? 0 : 4);
+		Vector3 v = vertical * cam.transform.forward;
+		Vector3 h = horizontal * cam.transform.right;
+		moveDir = (v + h).normalized;
+		moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+		Grounded = IsGrounded ();
+
+		body.drag = (moveAmount > Mathf.Epsilon || !Grounded ? 0 : 4);
 
 		bool run = InputControl.GetButtonDown("Shift");
 		float targetSpeed = moveSpeed;
@@ -68,7 +77,9 @@ public class CharacterControls : MonoBehaviour {
 			targetSpeed = runSpeed;
 		}
 
-		body.velocity = moveDir * (targetSpeed * moveAmount);
+		if (Grounded) {
+			body.velocity = moveDir * (targetSpeed * moveAmount);
+		}
 
 		Vector3 targetDir = moveDir;
 		targetDir.y = 0;
@@ -76,13 +87,23 @@ public class CharacterControls : MonoBehaviour {
 			targetDir = transform.forward;
 		}
 		Quaternion rotation = Quaternion.LookRotation(targetDir);
-		Quaternion targetRotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * moveAmount * rotateSpeed);
+		Quaternion targetRotation = Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * moveAmount * rotateSpeed);
 		transform.rotation = targetRotation;
+	}
 
-		HandleMovementAnimations();
+
+	private bool IsGrounded() {
+		Vector3 origin = transform.position + Vector3.up;
+		Vector3 dir = Vector3.down;
+		float distance = 1.0f;
+		RaycastHit hit;
+		if (Physics.Raycast (origin, dir, out hit, distance, ignoreLayers)) {
+			return true;
+		}
+		return false;
 	}
 
 	private void HandleMovementAnimations() {
-		anim.SetFloat("Vertical", moveAmount, 0.4f, Time.deltaTime);
+		anim.SetFloat("Vertical", moveAmount, 0.4f, Time.fixedDeltaTime);
 	}
 }
