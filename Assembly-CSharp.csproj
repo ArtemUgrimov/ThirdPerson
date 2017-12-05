@@ -109,7 +109,7 @@
      <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
      <Compile Include="Assets\Scripts\Character\CombatAnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Character\KeepBool.cs" />
-     <Compile Include="Assets\Scripts\Common\InputControl.cs" />
+     <Compile Include="Assets\Scripts\Common\Inputcontrol.cs" />
      <Compile Include="Assets\Scripts\Common\RagdollHelper.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventsList.cs" />

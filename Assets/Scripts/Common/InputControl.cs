@@ -16,6 +16,15 @@ public class InputControl : MonoBehaviour
 		return Input.GetButtonDown(buttonName);
 	}
 
+	public static bool GetButton(string buttonName) {
+		if (PlayerUIController.State() == MenuState.InMenu) {
+			if (menuInactiveButtons.IndexOf(buttonName) != -1) {
+				return false;
+			}
+		}
+		return Input.GetButton(buttonName);
+	}
+
 	public static float GetAxis(string axis) {
 		if (PlayerUIController.State() == MenuState.InMenu) {
 			if (menuInactiveAxis.IndexOf(axis) != -1) {
