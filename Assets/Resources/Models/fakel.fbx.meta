@@ -1,63 +1,17 @@
 fileFormatVersion: 2
-guid: 35cdd063f0b33ab4f918d7cb6c3c7f6f
-timeCreated: 1510484229
+guid: 3514ff7e9127e5a4eb9d51ac71153fed
+timeCreated: 1512915156
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: big_tower
-    100002: //RootNode
-    100004: def_tower_1
-    100006: def_tower_2
-    100008: door_l
-    100010: door_r
-    100012: entrance1
-    100014: flag5
-    100016: middle_tower
-    100018: side6
-    100020: transform1
-    100022: transform10
-    100024: transform11
-    100026: transform2
-    100028: transform3
-    100030: transform4
-    100032: transform5
-    100034: transform6
-    100036: transform7
-    100038: transform8
-    100040: transform9
-    100042: wall1
-    100044: wood
-    100046: wood1
-    400000: big_tower
-    400002: //RootNode
-    400004: def_tower_1
-    400006: def_tower_2
-    400008: door_l
-    400010: door_r
-    400012: entrance1
-    400014: flag5
-    400016: middle_tower
-    400018: side6
-    400020: transform1
-    400022: transform10
-    400024: transform11
-    400026: transform2
-    400028: transform3
-    400030: transform4
-    400032: transform5
-    400034: transform6
-    400036: transform7
-    400038: transform8
-    400040: transform9
-    400042: wall1
-    400044: wood
-    400046: wood1
-    2300000: wood1
-    2300002: //RootNode
-    3300000: wood1
-    3300002: //RootNode
-    4300000: wood1
+    100000: //RootNode
+    100002: fakel2
+    400000: //RootNode
+    400002: fakel2
+    2300000: fakel2
+    3300000: fakel2
+    4300000: fakel2
     9500000: //RootNode
   externalObjects:
   - first:
@@ -94,7 +48,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
