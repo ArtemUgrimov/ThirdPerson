@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterControls : MonoBehaviour {
@@ -19,6 +17,8 @@ public class CharacterControls : MonoBehaviour {
 	private float vertical;
 	private bool run;
     private bool lockOn;
+    private bool leftMouse;
+    private bool rightMouse;
 
 	private GameObject activeModel;
 	private Animator anim;
@@ -60,6 +60,8 @@ public class CharacterControls : MonoBehaviour {
 		horizontal = InputControl.GetAxis("Horizontal");
 		vertical = InputControl.GetAxis("Vertical");
 		run = InputControl.GetButton ("Shift");
+        leftMouse = InputControl.GetButtonDown("Fire1");
+        rightMouse = InputControl.GetButtonDown("Fire2");
 	}
 
 	private void FixedUpdate() {
@@ -81,7 +83,6 @@ public class CharacterControls : MonoBehaviour {
 		float targetSpeed = moveSpeed;
 		if (run) {
 			targetSpeed = runSpeed;
-            lockOn = false;
 		}
 
 		if (Grounded) {
@@ -113,14 +114,22 @@ public class CharacterControls : MonoBehaviour {
 	}
 
 	private void HandleMovementAnimations() {
-		anim.SetFloat("Vertical", moveAmount, 0.4f, Time.fixedDeltaTime);
+        anim.SetFloat("MoveAmount", moveAmount, 0.1f, Time.fixedDeltaTime);
 	}
 
+    private void LockOn() {
+        lockOn = true;
+    }
+
+    private void LockOff() {
+        lockOn = false;
+    }
+
 	private void UpdateAnimator() {
-		anim.SetBool("onGround", Grounded);
-        if (run && moveAmount > Mathf.Epsilon)
-		    anim.SetBool("run", true);
-        else
-            anim.SetBool("run", false);
+//		anim.SetBool("onGround", Grounded);
+//        if (run && moveAmount > Mathf.Epsilon)
+//		    anim.SetBool("run", true);
+//        else
+//            anim.SetBool("run", false);
 	}
 }

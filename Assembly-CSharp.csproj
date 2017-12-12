@@ -102,13 +102,13 @@
      <Compile Include="Assets\Scripts\Camera\FreeLookCam.cs" />
      <Compile Include="Assets\Scripts\Camera\PivotBasedCameraRig.cs" />
      <Compile Include="Assets\Scripts\Camera\ProtectCameraFromWallClip.cs" />
-     <Compile Include="Assets\Scripts\Character\AttackController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterAnimatorController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterControls.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterIK.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
      <Compile Include="Assets\Scripts\Character\CombatAnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Character\KeepBool.cs" />
+     <Compile Include="Assets\Scripts\Character\WeaponController.cs" />
      <Compile Include="Assets\Scripts\Common\Inputcontrol.cs" />
      <Compile Include="Assets\Scripts\Common\RagdollHelper.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />

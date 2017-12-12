@@ -33,18 +33,9 @@ public class CharacterAnimatorController : NetworkBehaviour {
 		for (int i = 0; i < animator.parameterCount; ++i) {
 			netAnimator.SetParameterAutoSend(i, true);
 		}
-
-		EventManager.StartListening(EventsList.EVENT_ANGLE_CHANGED, AngleChanged);
-		EventManager.StartListening(EventsList.CAMERA_MOVED, CameraMoved);
-	}
-
-	void OnDestroy() {
-		EventManager.StopListening(EventsList.EVENT_ANGLE_CHANGED, AngleChanged);
-		EventManager.StopListening(EventsList.CAMERA_MOVED, CameraMoved);
 	}
 
 	public override void OnStartLocalPlayer() {
-		EventManager.TriggerEvent(EventsList.UPDATE_CAMERA_TARGET, transform);
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 

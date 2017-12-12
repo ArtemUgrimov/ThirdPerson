@@ -46,6 +46,7 @@ public class CameraControls : MonoBehaviour {
 
 		pivot = transform.GetChild(0);
 		cam = pivot.GetChild(0);
+        transform.parent = null;
 	}
 
 	private void FixedUpdate() {
@@ -72,7 +73,7 @@ public class CameraControls : MonoBehaviour {
 		}
 
 		if (lockOn) {
-			
+//            target.rotation = Quaternion.Slerp(target.rotation, )
 		}
 
 		LookAngle += smoothX * targetSpeed;

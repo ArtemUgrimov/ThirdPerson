@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType {
-	Axe,
-	Sword_Shield,
-	THSword
+	None = 0,
+	OneHand,
+	TwoHands
+}
+
+[System.Serializable]
+public struct PositionRotation {
+    public Vector3 position;
+    public Vector3 rotation;
 }
 
 public class MainWeapon : MonoBehaviour {
 
+    [SerializeField]
+    private PositionRotation transformActive;
+    [SerializeField]
+    private PositionRotation transformInactive;
 	[SerializeField]
-	int damage = 25;
+	private int damage = 25;
 
 	public WeaponType type;
 
@@ -23,12 +33,28 @@ public class MainWeapon : MonoBehaviour {
 		set { attacking = value; }
 	}
 
-	void OnEnable() {
-		Transform superTrans = Utils.GetSuperParent(transform);
-		if (superTrans != null) {
-			superParent = superTrans.gameObject;
-			superParent.SendMessage("UpdateWeapon", this, SendMessageOptions.DontRequireReceiver);
-		}
+    public void Equip(Transform holder) {
+        transform.parent = transform;
+        transform.position = transformActive.position;
+        transform.rotation = Quaternion.Euler(transformActive.rotation);
+    }
+
+    public void Unequip(Transform holder) {
+        transform.parent = transform;
+        transform.position = transformInactive.position;
+        transform.rotation = Quaternion.Euler(transformInactive.rotation);
+    }
+
+    void NotifyPlayer() {
+        Transform superTrans = Utils.GetSuperParent(transform);
+        if (superTrans != null) {
+            superParent = superTrans.gameObject;
+            superParent.SendMessage("UpdateWeapon", this, SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
+    void OnEnable() {
+        NotifyPlayer();
 	}
 
 	void OnTriggerEnter(Collider other) {
