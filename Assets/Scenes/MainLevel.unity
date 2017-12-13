@@ -65,7 +65,7 @@ LightmapSettings:
     m_CompAOExponentDirect: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
-    m_LightmapsBakeMode: 1
+    m_LightmapsBakeMode: 0
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
@@ -7044,6 +7044,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b9e9d5050a723d49b6493cd0f611fa5, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &338126249 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 3b9e9d5050a723d49b6493cd0f611fa5, type: 3}
+  m_PrefabInternal: {fileID: 338126248}
+--- !u!64 &338126250
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338126249}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 3b9e9d5050a723d49b6493cd0f611fa5, type: 3}
 --- !u!1001 &356935304
 Prefab:
   m_ObjectHideFlags: 0
@@ -7149,7 +7167,7 @@ Light:
     m_Bits: 4294967295
   m_Lightmapping: 1
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 9.29
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -21532,12 +21550,12 @@ Prefab:
     - target: {fileID: 224283511033089426, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 548
+      value: 501
       objectReference: {fileID: 0}
     - target: {fileID: 224283511033089426, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 308.5
+      value: 282
       objectReference: {fileID: 0}
     - target: {fileID: 224283511033089426, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
@@ -21622,22 +21640,22 @@ Prefab:
     - target: {fileID: 224246135877532848, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -250
+      value: -249.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224246135877532848, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -27.5
       objectReference: {fileID: 0}
     - target: {fileID: 224538229680741016, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -250
+      value: -249.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224538229680741016, guid: 2dce79fd3b27c438097339f0a99f216c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 27.5
       objectReference: {fileID: 0}
     - target: {fileID: 1408026610263014, guid: 2dce79fd3b27c438097339f0a99f216c, type: 2}
       propertyPath: m_IsActive

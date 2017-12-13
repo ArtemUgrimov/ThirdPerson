@@ -108,6 +108,7 @@
      <Compile Include="Assets\Scripts\Character\CharacterSoundManager.cs" />
      <Compile Include="Assets\Scripts\Character\CombatAnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Character\KeepBool.cs" />
+     <Compile Include="Assets\Scripts\Character\Lockable.cs" />
      <Compile Include="Assets\Scripts\Character\WeaponController.cs" />
      <Compile Include="Assets\Scripts\Common\Inputcontrol.cs" />
      <Compile Include="Assets\Scripts\Common\RagdollHelper.cs" />

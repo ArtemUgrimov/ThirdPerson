@@ -34,15 +34,15 @@ public class MainWeapon : MonoBehaviour {
 	}
 
     public void Equip(Transform holder) {
-        transform.parent = transform;
-        transform.position = transformActive.position;
-        transform.rotation = Quaternion.Euler(transformActive.rotation);
+        transform.parent = holder;
+        transform.localPosition = transformActive.position;
+        transform.localRotation = Quaternion.Euler(transformActive.rotation);
     }
 
     public void Unequip(Transform holder) {
-        transform.parent = transform;
-        transform.position = transformInactive.position;
-        transform.rotation = Quaternion.Euler(transformInactive.rotation);
+        transform.parent = holder;
+        transform.localPosition = transformInactive.position;
+        transform.localRotation = Quaternion.Euler(transformInactive.rotation);
     }
 
     void NotifyPlayer() {

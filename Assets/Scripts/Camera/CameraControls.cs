@@ -29,6 +29,9 @@ public class CameraControls : MonoBehaviour {
 
 	private bool lockOn;
 
+    private Float angle = new Float();
+    private Float camMoveAngle = new Float();
+
 	[HideInInspector]
 	public float LookAngle {
 		get;
@@ -72,9 +75,21 @@ public class CameraControls : MonoBehaviour {
 			smoothY = vertical;
 		}
 
-		if (lockOn) {
-//            target.rotation = Quaternion.Slerp(target.rotation, )
-		}
+        // get a "forward vector" for each rotation
+        Vector3 forwardA = transform.localRotation * Vector3.forward;
+        Vector3 forwardB = target.rotation * Vector3.forward;
+
+        // get a numeric angle for each vector, on the X-Z plane (relative to world forward)
+        float angleA = Mathf.Atan2(forwardA.x, forwardA.z) * Mathf.Rad2Deg;
+        float angleB = Mathf.Atan2(forwardB.x, forwardB.z) * Mathf.Rad2Deg;
+
+        // get the signed difference in these angles
+        float _signedAngle = Mathf.DeltaAngle(angleA, angleB);
+        angle.value = -_signedAngle;
+
+        camMoveAngle.value = smoothX * mouseSensitivity;
+        EventManager.TriggerEvent(EventsList.CAMERA_MOVED, camMoveAngle);
+        EventManager.TriggerEvent(EventsList.EVENT_ANGLE_CHANGED, angle);
 
 		LookAngle += smoothX * targetSpeed;
 		transform.rotation = Quaternion.Euler(0, LookAngle, 0);

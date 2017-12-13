@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class WeaponController : NetworkBehaviour {
+public class WeaponController : Lockable {
 
     [SerializeField]
     Transform weaponHolder;
@@ -19,7 +19,6 @@ public class WeaponController : NetworkBehaviour {
 
     MainWeapon mainWeapon = null;
     bool attackDone = true;
-    bool lockOn = false;
 
 	IEnumerator kickRoutine = null;
 	IEnumerator endCoroutine = null;
@@ -64,25 +63,38 @@ public class WeaponController : NetworkBehaviour {
 					StartCoroutine (KickDone(0.2f));
 				}
 			}
-            if (InputControl.GetButtonDown("Equip")) {
-                if (!lockOn) {
-                    EquipWeapon();
-                    animator.SetTrigger("LockOn");
-                    SendMessage("LockOn", SendMessageOptions.DontRequireReceiver);
-                } else {
-                    UnequipWeapon();
-                    animator.SetTrigger("LockOff");
-                    SendMessage("LockOff", SendMessageOptions.DontRequireReceiver);
+            if (InputControl.GetButton("Shift")) {
+                if (lockOn) {
+                    UpdateLock(false);
+                    UpdateEquip();
                 }
-                lockOn = !lockOn;
+            } else if (InputControl.GetButtonDown("Equip")) {
+                UpdateLock(!lockOn);
+                UpdateEquip();
             }
-            if (lockOn && InputControl.GetButton("Shift")) {
-                animator.SetTrigger("LockOff");
-                SendMessage("LockOff", SendMessageOptions.DontRequireReceiver);
-                lockOn = false;
-            }
+
+            animator.SetBool("Locked", lockOn);
 		}
 	}
+
+    void UpdateEquip() {
+        if (!lockOn) {
+            animator.SetTrigger("LockOff");
+            StartCoroutine(EquipLater(0.5f, false));
+        } else {
+            animator.SetTrigger("LockOn");
+            StartCoroutine(EquipLater(0.2f, true));
+        }
+    }
+
+    IEnumerator EquipLater(float dt, bool equip) {
+        yield return new WaitForSeconds(dt);
+        if (equip) {
+            EquipWeapon();
+        } else {
+            UnequipWeapon();
+        }
+    }
 
     void EquipWeapon() {
         mainWeapon.Equip(weaponHolder);
@@ -151,4 +163,8 @@ public class WeaponController : NetworkBehaviour {
 			return;
         animator.SetInteger("WeaponType", (int)mainWeapon.type);
 	}
+
+    void ResetAll() {
+        UnequipWeapon();
+    }
 }

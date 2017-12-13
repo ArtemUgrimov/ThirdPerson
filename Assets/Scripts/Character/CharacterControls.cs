@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CharacterControls : MonoBehaviour {
+public class CharacterControls : Lockable {
 
 	[Header("Inputs")]
 	[SerializeField]
@@ -12,11 +12,15 @@ public class CharacterControls : MonoBehaviour {
 	private float runSpeed = 5.0f;
 	[SerializeField]
 	private float rotateSpeed = 5.0f;
+    [SerializeField]
+    private float lockonCoeff = 0.6f;
+
+    int horizontalId = Animator.StringToHash("Horizontal");
+    int verticalId = Animator.StringToHash("Vertical");
 
 	private float horizontal;
 	private float vertical;
 	private bool run;
-    private bool lockOn;
     private bool leftMouse;
     private bool rightMouse;
 
@@ -26,14 +30,24 @@ public class CharacterControls : MonoBehaviour {
 
 	private CameraControls cam;
 	private Vector3 moveDir;
-	private float moveAmount;
-
 	private int ignoreLayers = ~(1 << 8);
+
+    #region properties
+    public float MoveAmount {
+        get;
+        private set;
+    }
 
 	public bool Grounded {
 		get;
 		private set;
 	}
+
+    public bool CanMove {
+        get;
+        private set;
+    }
+    #endregion
 
 	private void Start() {
 		SetupAnimator();
@@ -74,30 +88,43 @@ public class CharacterControls : MonoBehaviour {
 		Vector3 v = vertical * cam.transform.forward;
 		Vector3 h = horizontal * cam.transform.right;
 		moveDir = (v + h).normalized;
-		moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+		MoveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
 		Grounded = IsGrounded ();
 
-		body.drag = (moveAmount > Mathf.Epsilon || !Grounded ? 0 : 4);
+		body.drag = (MoveAmount > Mathf.Epsilon || !Grounded ? 0 : 4);
+
+        CanMove = anim.GetBool("CanMove");
 
 		bool run = InputControl.GetButton("Shift");
-		float targetSpeed = moveSpeed;
+        float targetSpeed = moveSpeed * (lockOn ? lockonCoeff : 1);
 		if (run) {
 			targetSpeed = runSpeed;
 		}
 
-		if (Grounded) {
-			body.velocity = moveDir * (targetSpeed * moveAmount);
+        if (Grounded && CanMove) {
+            float y = body.velocity.y;
+            Vector3 move = moveDir * (targetSpeed * MoveAmount);
+            move.y = y;
+            body.velocity = move;
+            anim.SetFloat(horizontalId, horizontal);
+            anim.SetFloat(verticalId, vertical);
 		}
 
-        if (!lockOn) {
+        if (!lockOn && CanMove) {
             Vector3 targetDir = moveDir;
             targetDir.y = 0;
             if (targetDir == Vector3.zero) {
                 targetDir = transform.forward;
             }
             Quaternion rotation = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * moveAmount * rotateSpeed);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * MoveAmount * rotateSpeed);
             transform.rotation = targetRotation;
+        }
+
+        if (!CanMove) {
+            anim.applyRootMotion = true;
+        } else {
+            anim.applyRootMotion = false;
         }
 	}
 
@@ -114,22 +141,10 @@ public class CharacterControls : MonoBehaviour {
 	}
 
 	private void HandleMovementAnimations() {
-        anim.SetFloat("MoveAmount", moveAmount, 0.1f, Time.fixedDeltaTime);
+        anim.SetFloat("MoveAmount", MoveAmount, 0.1f, Time.fixedDeltaTime);
 	}
 
-    private void LockOn() {
-        lockOn = true;
-    }
-
-    private void LockOff() {
-        lockOn = false;
-    }
-
 	private void UpdateAnimator() {
-//		anim.SetBool("onGround", Grounded);
-//        if (run && moveAmount > Mathf.Epsilon)
-//		    anim.SetBool("run", true);
-//        else
-//            anim.SetBool("run", false);
+		anim.SetBool("onGround", Grounded);
 	}
 }

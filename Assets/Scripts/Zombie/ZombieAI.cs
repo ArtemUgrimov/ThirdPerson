@@ -99,14 +99,6 @@ public class ZombieAI : NetworkBehaviour {
 		mainWeapon = weapon;
 	}
 
-	void AttackBegin() {
-		mainWeapon.Attacking = true;
-	}
-
-	void AtatckEnd() {
-		mainWeapon.Attacking = false;
-	}
-
 	public void OnTriggerEnter(Collider other) {
 		if (state == State.Dead)
 			return;
@@ -181,6 +173,7 @@ public class ZombieAI : NetworkBehaviour {
 		if (getTargetDistance() <= attackDistance) {
 			SendMessage("Attack");
 			switchState(State.Attacking);
+            mainWeapon.Attacking = true;
 		} else {
 			SendMessage("Run");
 			switchState(State.Running);
@@ -235,8 +228,11 @@ public class ZombieAI : NetworkBehaviour {
 	}
 
 	void SendEvent(string name) {
-		if (name == "wokeUp") {
-			state = State.Idle;
-		}
+        if (name == "wokeUp") {
+            state = State.Idle;
+        } else if (name == "toStrike") {
+            mainWeapon.Attacking = false;
+        }
+        Debug.Log(name);
 	}
 }
