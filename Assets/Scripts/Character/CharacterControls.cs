@@ -95,10 +95,10 @@ public class CharacterControls : Lockable {
 
         CanMove = anim.GetBool("CanMove");
 
-		bool run = InputControl.GetButton("Shift");
+		run = InputControl.GetButton("Shift");
         float targetSpeed = moveSpeed * (lockOn ? lockonCoeff : 1);
 		if (run) {
-			targetSpeed = runSpeed;
+			targetSpeed = runSpeed * (lockOn ? lockonCoeff : 1);
 		}
 
         if (Grounded && CanMove) {
@@ -141,7 +141,7 @@ public class CharacterControls : Lockable {
 	}
 
 	private void HandleMovementAnimations() {
-        anim.SetFloat("MoveAmount", MoveAmount, 0.1f, Time.fixedDeltaTime);
+		anim.SetFloat("MoveAmount", MoveAmount);//, 0.1f, Time.fixedDeltaTime);
 	}
 
 	private void UpdateAnimator() {

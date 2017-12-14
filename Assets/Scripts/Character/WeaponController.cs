@@ -11,6 +11,8 @@ public class WeaponController : Lockable {
     Transform oneHandHolder;
     [SerializeField]
     Transform twoHandsHolder;
+	[SerializeField]
+	Transform secondaryHolder;
 
     Animator animator;
     static int combatId = Animator.StringToHash("Combat");
@@ -18,7 +20,9 @@ public class WeaponController : Lockable {
     static int attackAnimIndexId = Animator.StringToHash("AttackAnimIndex");
 
     MainWeapon mainWeapon = null;
+	SecondaryWeapon secondaryWeapon = null;
     bool attackDone = true;
+	bool equipping = false;
 
 	IEnumerator kickRoutine = null;
 	IEnumerator endCoroutine = null;
@@ -32,14 +36,17 @@ public class WeaponController : Lockable {
         FindHolder(weaponHolder, "WeaponHolder");
         FindHolder(oneHandHolder, "OneHandHolder");
         FindHolder(twoHandsHolder, "TwoHandsHolder");
+		FindHolder(secondaryHolder, "SecondaryHolder");
     }
 
     void FindHolder(Transform holder, string holderName) {
         if (holder == null) {
-            holder = transform.Find("holderName");
+            holder = transform.Find(holderName);
             if (holder == null) {
                 Debug.LogError("Place " + holderName + " to character " + gameObject.name);
-            }
+			} else {
+				Debug.LogWarning(holderName + " were set automatically. Set it manually. " + gameObject.name);
+			}
         }
     }
 
@@ -63,12 +70,7 @@ public class WeaponController : Lockable {
 					StartCoroutine (KickDone(0.2f));
 				}
 			}
-            if (InputControl.GetButton("Shift")) {
-                if (lockOn) {
-                    UpdateLock(false);
-                    UpdateEquip();
-                }
-            } else if (InputControl.GetButtonDown("Equip")) {
+			if (!equipping && InputControl.GetButtonDown("Equip")) {
                 UpdateLock(!lockOn);
                 UpdateEquip();
             }
@@ -79,12 +81,13 @@ public class WeaponController : Lockable {
 
     void UpdateEquip() {
         if (!lockOn) {
-            animator.SetTrigger("LockOff");
             StartCoroutine(EquipLater(0.5f, false));
+			StartCoroutine(EquipDone(1.5f));
         } else {
-            animator.SetTrigger("LockOn");
             StartCoroutine(EquipLater(0.2f, true));
+			StartCoroutine(EquipDone(1.0f));
         }
+		equipping = true;
     }
 
     IEnumerator EquipLater(float dt, bool equip) {
@@ -96,8 +99,16 @@ public class WeaponController : Lockable {
         }
     }
 
+	IEnumerator EquipDone(float dt) {
+		yield return new WaitForSeconds(dt);
+		equipping = false;
+	}
+
     void EquipWeapon() {
         mainWeapon.Equip(weaponHolder);
+		if (secondaryWeapon != null) {
+			secondaryWeapon.Equip(secondaryHolder);
+		}
     }
 
     void UnequipWeapon() {
@@ -107,6 +118,9 @@ public class WeaponController : Lockable {
                 break;
             case WeaponType.OneHand:
                 mainWeapon.Unequip(oneHandHolder);
+				if (secondaryWeapon != null) {
+					secondaryWeapon.Unequip(twoHandsHolder);
+				}
                 break;
             case WeaponType.None:
                 break;
@@ -158,10 +172,20 @@ public class WeaponController : Lockable {
 
 	void UpdateWeapon(MainWeapon weapon) {
 		mainWeapon = weapon;
-
-		if (!isLocalPlayer)
-			return;
         animator.SetInteger("WeaponType", (int)mainWeapon.type);
+	}
+
+	void RemoveWeapon() {
+		mainWeapon = null;
+		animator.SetInteger("WeaponType", 0);
+	}
+
+	void UpdateSecondary(SecondaryWeapon secondary) {
+		secondaryWeapon = secondary;
+	}
+
+	void RemoveSecondary() {
+		secondaryWeapon = null;
 	}
 
     void ResetAll() {

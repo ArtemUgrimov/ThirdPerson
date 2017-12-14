@@ -1,16 +1,15 @@
-﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|" StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character\CharacterControls.cs">
+﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{9C335827-BB19-5725-9409-A47A25D59F5A}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/WeaponController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Character\CharacterAnimatorController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Character\CharacterControls.cs" Line="85" Column="67" />
-      <File FileName="Assets\Scripts\Character\WeaponController.cs" Line="89" Column="5" />
-      <File FileName="Assets\Scripts\Weapons\MainWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera\CameraControls.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera\FreeLookCam.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Character\CombatAnimationHelper.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/CharacterAnimatorController.cs" Line="101" Column="2" />
+      <File FileName="Assets/Scripts/Character/CharacterControls.cs" Line="96" Column="10" />
+      <File FileName="Assets/Scripts/Weapons/SecondaryWeapon.cs" Line="14" Column="2" />
+      <File FileName="Assets/Scripts/Weapons/MainWeapon.cs" Line="19" Column="18" />
+      <File FileName="Assets/Scripts/Weapons/Holdable.cs" Line="31" Column="2" />
+      <File FileName="Assets/Scripts/Character/WeaponController.cs" Line="75" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

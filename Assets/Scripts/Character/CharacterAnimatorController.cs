@@ -69,6 +69,10 @@ public class CharacterAnimatorController : Lockable {
 		if (isMoving) {
 			if (System.Math.Abs(running) > Mathf.Epsilon) {
 				animator.SetBool(runningId, true);
+				//if (lockOn) {
+				//	UpdateLock(false);
+				//	SendMessage("UpdateEquip");
+				//}
 			} else {
 				animator.SetBool(runningId, false);
 			}
@@ -83,6 +87,7 @@ public class CharacterAnimatorController : Lockable {
 				StartCoroutine (dodgeCoroutine);
 			}
 		}
+		animator.SetFloat(mouseXId, mouseX, 0.4f, Time.deltaTime);
 	}
 
 	void AngleChanged(object info) {
@@ -95,7 +100,7 @@ public class CharacterAnimatorController : Lockable {
 	}
 
 	void CameraMoved(object info) {
-        if (!isLocalPlayer || !lockOn)
+		if (!isLocalPlayer || lockOn || !controls.CanMove)
 			return;
 		Float angle = info as Float;
         if (System.Math.Abs(movingMagnitude) > Mathf.Epsilon)
