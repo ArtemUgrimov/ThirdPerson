@@ -80,7 +80,6 @@ public class PlayerUIController : MonoBehaviour {
 
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
-		Debug.Log (Cursor.visible);
 
 		if (Instance().inGameUI)
 			Instance().inGameUI.SetActive(false);

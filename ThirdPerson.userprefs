@@ -1,6 +1,7 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupConfiguration="{E86087B2-6C73-F7ED-FB91-6D3E42129563}|Unit Tests" StartupItem="Assembly-UnityScript.unityproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Utils/TestNetworkManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/PlayerUIController.cs">
     <Files>
+      <File FileName="Assets/Scripts/UI/PlayerUIController.cs" Line="83" Column="1" />
       <File FileName="Assets/Scripts/Network/PlayerSetup.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Character/CharacterControls.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Utils/TestNetworkManager.cs" Line="4" Column="29" />
