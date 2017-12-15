@@ -14,6 +14,7 @@ public class CharacterAnimatorController : Lockable {
     CharacterControls controls;
 
 	int mouseXId = Animator.StringToHash("MouseX");
+	int crouchId = Animator.StringToHash("Crouch");
 	int horAngle = Animator.StringToHash("CameraAngle");
 	int runningId = Animator.StringToHash("Running");
 	int movingId = Animator.StringToHash("Moving");
@@ -88,6 +89,7 @@ public class CharacterAnimatorController : Lockable {
 			}
 		}
 		animator.SetFloat(mouseXId, mouseX, 0.4f, Time.deltaTime);
+		animator.SetBool(crouchId, controls.Crouch);
 	}
 
 	void AngleChanged(object info) {

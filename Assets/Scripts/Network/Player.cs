@@ -128,7 +128,8 @@ public class Player : NetworkBehaviour {
 	}
 
 	void SetPlayerCamera() {
-		GameManager.instance.SetSceneCameraActive (false);
+		if (GameManager.instance)
+			GameManager.instance.SetSceneCameraActive (false);
 		GetComponent<CameraController> ().ActivateCamera ();
 	}
 

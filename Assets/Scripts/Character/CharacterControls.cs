@@ -9,6 +9,8 @@ public class CharacterControls : Lockable {
 	[SerializeField]
 	private float moveSpeed = 3.0f;
 	[SerializeField]
+	private float crouchSpeed = 1.5f;
+	[SerializeField]
 	private float runSpeed = 5.0f;
 	[SerializeField]
 	private float rotateSpeed = 5.0f;
@@ -21,6 +23,7 @@ public class CharacterControls : Lockable {
 	private float horizontal;
 	private float vertical;
 	private bool run;
+	private bool crouch;
     private bool leftMouse;
     private bool rightMouse;
 
@@ -44,9 +47,21 @@ public class CharacterControls : Lockable {
 	}
 
     public bool CanMove {
-        get;
-        private set;
+		get;
+		private set;
     }
+
+	public bool Crouch {
+		get {
+			if (lockOn || run) {
+				return false;
+			}
+			return crouch;
+		}
+		private set {
+			crouch = value;
+		}
+	}
     #endregion
 
 	private void Start() {
@@ -76,6 +91,8 @@ public class CharacterControls : Lockable {
 		run = InputControl.GetButton ("Shift");
         leftMouse = InputControl.GetButtonDown("Fire1");
         rightMouse = InputControl.GetButtonDown("Fire2");
+		run = InputControl.GetButton("Shift");
+		Crouch = InputControl.GetButton ("Crouch");
 	}
 
 	private void FixedUpdate() {
@@ -95,10 +112,13 @@ public class CharacterControls : Lockable {
 
         CanMove = anim.GetBool("CanMove");
 
-		run = InputControl.GetButton("Shift");
         float targetSpeed = moveSpeed * (lockOn ? lockonCoeff : 1);
 		if (run) {
 			targetSpeed = runSpeed * (lockOn ? lockonCoeff : 1);
+			Crouch = false;
+		} else if (Crouch) {
+			targetSpeed = crouchSpeed;
+			UpdateLock (false);
 		}
 
         if (Grounded && CanMove) {
