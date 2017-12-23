@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class HitInfo {
+	public PosRot transform = new PosRot();
+	public int damage;
+}
+
 public enum WeaponType {
 	None = 0,
 	OneHand,
@@ -17,6 +22,11 @@ public struct PositionRotation {
 public class MainWeapon : Holdable {
 
 	[SerializeField]
+	private List<AudioClip> attackSounds = new List<AudioClip> ();
+	[SerializeField]
+	private List<AudioClip> hitSounds = new List<AudioClip> ();
+
+	[SerializeField]
 	private int damage = 25;
 
 	public WeaponType type;
@@ -25,6 +35,13 @@ public class MainWeapon : Holdable {
 	public bool Attacking {
 		get { return attacking; }
 		set { attacking = value; }
+	}
+
+	public void Attack() {
+		if (superParent != null && attackSounds.Count > 0) {
+			AudioSource source = superParent.GetComponent<AudioSource> ();
+			source.PlayOneShot (attackSounds [Random.Range (0, attackSounds.Count)]);
+		}
 	}
 
     void NotifyPlayer() {
@@ -41,7 +58,19 @@ public class MainWeapon : Holdable {
 
 	void OnTriggerEnter(Collider other) {
 		if (attacking && other.gameObject != superParent && other.transform.root != superParent.transform && other.gameObject.tag == "Body") {
-			other.gameObject.SendMessage ("GotHit", damage, SendMessageOptions.DontRequireReceiver);
+
+			Vector3 pos = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+			HitInfo info = new HitInfo();
+			info.damage = damage;
+			info.transform.position = pos;
+
+			other.gameObject.SendMessage ("GotHit", info, SendMessageOptions.DontRequireReceiver);
+
+			if (superParent != null && hitSounds.Count > 0) {
+				AudioSource source = superParent.GetComponent<AudioSource> ();
+				source.PlayOneShot (hitSounds [Random.Range (0, hitSounds.Count)]);
+			}
 		}
 	}
 }

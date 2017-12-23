@@ -195,7 +195,7 @@ public class ZombieAI : NetworkBehaviour {
 		Utils.SetRagdoll(true, gameObject);
 	}
 
-	void GotHit(int amount) {
+	void GotHit(HitInfo info) {
 		if (state == State.Dead)
 			return;
 		switchState(State.Hit);

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class PosRot {
+	public Vector3 position;
+	public Quaternion rotation = Quaternion.identity;
+}
+
 public static class Utils {
 	public static Transform GetSuperParent(Transform tf) {
 		Transform parent = tf.parent;
@@ -21,21 +26,21 @@ public static class Utils {
 		return parent;
 	}
 
-	public static void SetKinematic(Transform tf, bool val, string ignoreTag = "NONE") {
+	public static void SetKinematic(Transform tf, bool val, string tag = "Body") {
 		Rigidbody rb = tf.GetComponent<Rigidbody>();
 		Collider col = tf.GetComponent<Collider>();
-		if (rb && col && tf.tag != ignoreTag) {
+		if (rb && col && tf.tag == tag) {
 			rb.isKinematic = val;
 			col.isTrigger = val;
 		}
 
 		for (int i = 0; i < tf.childCount; ++i) {
-			SetKinematic(tf.GetChild(i), val, ignoreTag);
+			SetKinematic(tf.GetChild(i), val, tag);
 		}
 	}
 
-	public static void SetRagdoll(bool val, GameObject go, string ignoreTag = "NONE") {
-		SetKinematic(go.transform, !val, ignoreTag);
+	public static void SetRagdoll(bool val, GameObject go, string tag = "Body") {
+		SetKinematic(go.transform, !val, tag);
 
 		Collider col = go.GetComponent<Collider>();
 		col.isTrigger = val;

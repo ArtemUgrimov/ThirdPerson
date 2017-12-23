@@ -3225,6 +3225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957380124c1954a199451f4378c47ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformActive:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+  transformInactive:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
   damage: 50
   type: 0
 --- !u!114 &114815449812307276
@@ -3261,6 +3267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  bloodPrefab: {fileID: 100000, guid: bd1b09ecbf112814399e16be0e5243a9, type: 2}
 --- !u!114 &114922163898922386
 MonoBehaviour:
   m_ObjectHideFlags: 1

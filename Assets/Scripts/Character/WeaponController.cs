@@ -57,6 +57,7 @@ public class WeaponController : Lockable {
 				animator.SetInteger (attackAnimIndexId, index);
 				animator.SetBool (combatId, true);
 				mainWeapon.Attacking = true;
+				mainWeapon.Attack ();
 				attackDone = false;
 				if (endCoroutine != null) {
 					StopCoroutine (endCoroutine);
@@ -111,15 +112,15 @@ public class WeaponController : Lockable {
 		}
     }
 
-    void UnequipWeapon() {
+	void UnequipWeapon(bool withSound = true) {
         switch (mainWeapon.type) {
             case WeaponType.TwoHands:
-                mainWeapon.Unequip(twoHandsHolder);
+				mainWeapon.Unequip(twoHandsHolder, withSound);
                 break;
             case WeaponType.OneHand:
-                mainWeapon.Unequip(oneHandHolder);
+				mainWeapon.Unequip(oneHandHolder, withSound);
 				if (secondaryWeapon != null) {
-					secondaryWeapon.Unequip(twoHandsHolder);
+					secondaryWeapon.Unequip(twoHandsHolder, withSound);
 				}
                 break;
             case WeaponType.None:
@@ -189,6 +190,6 @@ public class WeaponController : Lockable {
 	}
 
     void ResetAll() {
-        UnequipWeapon();
+        UnequipWeapon(false);
     }
 }
