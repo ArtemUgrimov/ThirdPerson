@@ -52,7 +52,7 @@ public class WeaponController : Lockable {
 
 	void Update() {
 		if (isLocalPlayer) {
-			if (InputControl.GetButtonDown ("Fire1") && attackDone) {
+			if (lockOn && InputControl.GetButtonDown ("Fire1") && attackDone) {
 				int index = Random.Range(0, 6);
 				animator.SetInteger (attackAnimIndexId, index);
 				animator.SetBool (combatId, true);

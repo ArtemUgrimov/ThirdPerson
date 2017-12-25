@@ -15,9 +15,7 @@ public class CharacterAnimatorController : Lockable {
 
 	int mouseXId = Animator.StringToHash("MouseX");
 	int crouchId = Animator.StringToHash("Crouch");
-	int horAngle = Animator.StringToHash("CameraAngle");
 	int runningId = Animator.StringToHash("Running");
-	int movingId = Animator.StringToHash("Moving");
 	int dodgeFeatureId = Animator.StringToHash("Dodge_feature");
 
 	bool isMoving;
@@ -53,8 +51,6 @@ public class CharacterAnimatorController : Lockable {
 	}
 
 	void HandleMovement() {
-		float horizontal = InputControl.GetAxis("Horizontal");
-		float vertical = InputControl.GetAxis("Vertical");
 		float mouseX = InputControl.GetAxis("Mouse X");
 		float running = InputControl.GetAxis("Shift");
 
@@ -70,10 +66,6 @@ public class CharacterAnimatorController : Lockable {
 		if (isMoving) {
 			if (System.Math.Abs(running) > Mathf.Epsilon) {
 				animator.SetBool(runningId, true);
-				//if (lockOn) {
-				//	UpdateLock(false);
-				//	SendMessage("UpdateEquip");
-				//}
 			} else {
 				animator.SetBool(runningId, false);
 			}

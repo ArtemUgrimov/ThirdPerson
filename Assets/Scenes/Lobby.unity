@@ -606,17 +606,17 @@ Prefab:
     - target: {fileID: 224555476394331786, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -171.16656
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224719153558475138, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -211.16656
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224922526101309738, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -251.16656
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224555476394331786, guid: 53fc67e916d2b714e8f3c53b23a3263b,
         type: 2}

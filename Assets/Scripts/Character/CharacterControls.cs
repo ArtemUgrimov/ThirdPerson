@@ -24,10 +24,6 @@ public class CharacterControls : Lockable {
 	private float vertical;
 	private bool run;
 	private bool crouch;
-    private bool leftMouse;
-    private bool rightMouse;
-
-	private GameObject activeModel;
 	private Animator anim;
 	private Rigidbody body;
 
@@ -73,7 +69,6 @@ public class CharacterControls : Lockable {
 	private void SetupAnimator() {
 		anim = GetComponentInChildren<Animator>();
 		if (anim != null) {
-			activeModel = anim.gameObject;
 			anim.applyRootMotion = false;
 		}
 	}
@@ -89,9 +84,6 @@ public class CharacterControls : Lockable {
 		horizontal = InputControl.GetAxis("Horizontal");
 		vertical = InputControl.GetAxis("Vertical");
 		run = InputControl.GetButton ("Shift");
-        leftMouse = InputControl.GetButtonDown("Fire1");
-        rightMouse = InputControl.GetButtonDown("Fire2");
-		run = InputControl.GetButton("Shift");
 		Crouch = InputControl.GetButton ("Crouch");
 	}
 
@@ -152,7 +144,7 @@ public class CharacterControls : Lockable {
 	private bool IsGrounded() {
 		Vector3 origin = transform.position + Vector3.up;
 		Vector3 dir = Vector3.down;
-		float distance = 1.01f;
+		float distance = 1.2f;
 		RaycastHit hit;
 		if (Physics.Raycast (origin, dir, out hit, distance, ignoreLayers)) {
 			return true;
@@ -161,7 +153,7 @@ public class CharacterControls : Lockable {
 	}
 
 	private void HandleMovementAnimations() {
-		anim.SetFloat("MoveAmount", MoveAmount);//, 0.1f, Time.fixedDeltaTime);
+		anim.SetFloat("MoveAmount", MoveAmount);
 	}
 
 	private void UpdateAnimator() {

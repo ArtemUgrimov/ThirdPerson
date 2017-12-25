@@ -95,7 +95,7 @@ public class CharacterIK : NetworkBehaviour {
 //
 //		animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, weight);
 //		animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootPosition);
-//
+
 //		animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, weight);
 //		animator.SetIKRotation(AvatarIKGoal.LeftFoot, leftFootRotation);
 //

@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 54110110065358832}
   m_Layer: 8
   m_Name: LeftFootBottomPoint
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 54818175883757176}
   m_Layer: 8
   m_Name: RightFootBottomPoint
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3234,7 +3234,7 @@ MonoBehaviour:
   moveSpeed: 3
   crouchSpeed: 1.5
   runSpeed: 5
-  rotateSpeed: 5
+  rotateSpeed: 3
   lockonCoeff: 0.6
 --- !u!114 &114531699572770886
 MonoBehaviour:

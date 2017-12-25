@@ -116,6 +116,7 @@
      <Compile Include="Assets\Scripts\Character\WeaponController.cs" />
      <Compile Include="Assets\Scripts\Common\InputControl.cs" />
      <Compile Include="Assets\Scripts\Common\RagdollHelper.cs" />
+     <Compile Include="Assets\Scripts\Common\Spawner.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Events\EventsList.cs" />
      <Compile Include="Assets\Scripts\Network\GameManager.cs" />

@@ -43,12 +43,15 @@ public static class Utils {
 		SetKinematic(go.transform, !val, tag);
 
 		Collider col = go.GetComponent<Collider>();
-		col.isTrigger = val;
+		if (col != null)
+			col.isTrigger = val;
 
 		Rigidbody rb = go.GetComponent<Rigidbody>();
-		rb.isKinematic = val;
+		if (rb != null)
+			rb.isKinematic = val;
 
 		Animator animator = go.GetComponent<Animator>();
-		animator.enabled = !val;
+		if (animator != null)
+			animator.enabled = !val;
 	}
 }
