@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 114317997594776432}
   - component: {fileID: 114523557449980826}
   m_Layer: 8
-  m_Name: CharacterGuy
+  m_Name: CharacterSwordShield
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2948,7 +2948,7 @@ Animator:
   m_GameObject: {fileID: 1320953263853464}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 03933ba9aa6394dd19a25da3aead9c1a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6d14fd66258de4154968b28bce0bde41, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4689b017e79a84d4386f301b03841fed, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
