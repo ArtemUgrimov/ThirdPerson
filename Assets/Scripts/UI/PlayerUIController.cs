@@ -34,7 +34,8 @@ public class PlayerUIController : MonoBehaviour {
 	}
 
 	public static void Setup() {
-		instance.ShowInGameUI ();
+		if (instance)
+			instance.ShowInGameUI ();
 	}
 
 	void Update() {
@@ -77,7 +78,7 @@ public class PlayerUIController : MonoBehaviour {
 			return;
 		state = MenuState.InMenu;
 
-		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 
 		if (Instance().inGameUI)

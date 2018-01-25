@@ -26,10 +26,10 @@ public class TriggedHandler : MonoBehaviour {
 //			parent.SendMessage("OnTriggerExit", other);
 //	}
 
-	void GotHit(int damage) {
+	void GotHit(HitInfo info) {
 		if (parent) {
-			int dmg = distanceToParent == 0 ? damage : damage / distanceToParent;
-			parent.gameObject.SendMessage("GotHit", dmg);
+			info.damage = distanceToParent == 0 ? info.damage : info.damage / distanceToParent;
+			parent.gameObject.SendMessage("GotHit", info);
 		}
 	}
 

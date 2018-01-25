@@ -62,8 +62,8 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
-	void GotHit(int amount) {
-		CmdGotHit(amount);
+	void GotHit(HitInfo info) {
+		CmdGotHit(info.damage);
 	}
 
 	[Command]
@@ -98,18 +98,27 @@ public class Player : NetworkBehaviour {
 			col.enabled = false;
 		}
 
-		Invoke ("SetSceneCamera", GameManager.instance.matchSettings.respawnTime - 2.0f);
+		if (GameManager.instance)
+			Invoke ("SetSceneCamera", GameManager.instance.matchSettings.respawnTime - 2.0f);
 
 		Debug.Log (transform.name + " now dead");
 		StartCoroutine (RespawnPlayer ());
 	}
 
 	IEnumerator RespawnPlayer () {
-		yield return new WaitForSeconds (GameManager.instance.matchSettings.respawnTime);
+		float time = 0;
+		if (GameManager.instance) {
+			time = GameManager.instance.matchSettings.respawnTime;
+		}
+		yield return new WaitForSeconds (time);
 
 		SendMessage ("Respawn");
 		Transform spawnPoint = NetworkManager.singleton.GetStartPosition ();
-		Debug.Log(spawnPoint.position);
+		if (spawnPoint == null) {
+			spawnPoint = transform;
+			spawnPoint.position = new Vector3 ();
+			Debug.Log ("No spawn points. Respawning on death");
+		}
 		transform.position = spawnPoint.position;
 		transform.rotation = spawnPoint.rotation;
 
@@ -128,7 +137,8 @@ public class Player : NetworkBehaviour {
 	}
 
 	void SetPlayerCamera() {
-		GameManager.instance.SetSceneCameraActive (false);
+		if (GameManager.instance)
+			GameManager.instance.SetSceneCameraActive (false);
 		GetComponent<CameraController> ().ActivateCamera ();
 	}
 

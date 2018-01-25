@@ -14,9 +14,8 @@ public class CharacterAnimatorController : Lockable {
     CharacterControls controls;
 
 	int mouseXId = Animator.StringToHash("MouseX");
-	int horAngle = Animator.StringToHash("CameraAngle");
+	int crouchId = Animator.StringToHash("Crouch");
 	int runningId = Animator.StringToHash("Running");
-	int movingId = Animator.StringToHash("Moving");
 	int dodgeFeatureId = Animator.StringToHash("Dodge_feature");
 
 	bool isMoving;
@@ -52,8 +51,6 @@ public class CharacterAnimatorController : Lockable {
 	}
 
 	void HandleMovement() {
-		float horizontal = InputControl.GetAxis("Horizontal");
-		float vertical = InputControl.GetAxis("Vertical");
 		float mouseX = InputControl.GetAxis("Mouse X");
 		float running = InputControl.GetAxis("Shift");
 
@@ -83,6 +80,8 @@ public class CharacterAnimatorController : Lockable {
 				StartCoroutine (dodgeCoroutine);
 			}
 		}
+		animator.SetFloat(mouseXId, mouseX, 0.4f, Time.deltaTime);
+		animator.SetBool(crouchId, controls.Crouch);
 	}
 
 	void AngleChanged(object info) {
@@ -95,7 +94,7 @@ public class CharacterAnimatorController : Lockable {
 	}
 
 	void CameraMoved(object info) {
-        if (!isLocalPlayer || !lockOn)
+		if (!isLocalPlayer || lockOn || !controls.CanMove)
 			return;
 		Float angle = info as Float;
         if (System.Math.Abs(movingMagnitude) > Mathf.Epsilon)

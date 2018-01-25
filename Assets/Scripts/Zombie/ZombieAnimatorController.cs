@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ZombieAnimatorController : MonoBehaviour {
 
-	Animator animator;
-	Quaternion moveDir = Quaternion.identity;
+	public Animator animator;
 
 	int idle_id = Animator.StringToHash("Idle");
 	int attack_id = Animator.StringToHash("Attack");
@@ -22,11 +21,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 	void OnDestroy() {
 	}
 
-	void Update() {
-		transform.rotation = Quaternion.Lerp(transform.rotation, moveDir, Time.deltaTime * 5.0f);
-	}
-
-	void Idle() {
+	public void Idle() {
 		animator.SetBool(idle_id, true);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);
@@ -35,7 +30,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, false);
 	}
 
-	void Walk() {
+	public void Walk() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, true);
@@ -44,7 +39,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, false);
 	}
 
-	void Run() {
+	public void Run() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);
@@ -54,7 +49,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, false);
 	}
 
-	void Attack() {
+	public void Attack() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, true);
 		animator.SetBool(walk_id, false);
@@ -63,11 +58,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, false);
 	}
 
-	void MoveDir(object param) {
-		moveDir = Quaternion.Euler(new Vector3(0.0f, param as Float, 0.0f));
-	}
-
-	void Scream() {
+	public void Scream() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);
@@ -76,7 +67,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, false);
 	}
 
-	void Death() {
+	public void Death() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);
@@ -87,7 +78,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		Invoke("Reset", 0.01f);
 	}
 
-	void Hit() {
+	public void Hit() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);
@@ -96,7 +87,7 @@ public class ZombieAnimatorController : MonoBehaviour {
 		animator.SetBool(got_hit_id, true);
 	}
 
-	void Reset() {
+	public void Reset() {
 		animator.SetBool(idle_id, false);
 		animator.SetBool(attack_id, false);
 		animator.SetBool(walk_id, false);

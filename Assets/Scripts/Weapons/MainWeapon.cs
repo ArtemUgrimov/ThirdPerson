@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class HitInfo {
+	public PosRot transform = new PosRot();
+	public int damage;
+}
+
 public enum WeaponType {
 	None = 0,
 	OneHand,
@@ -14,18 +19,17 @@ public struct PositionRotation {
     public Vector3 rotation;
 }
 
-public class MainWeapon : MonoBehaviour {
+public class MainWeapon : Holdable {
 
-    [SerializeField]
-    private PositionRotation transformActive;
-    [SerializeField]
-    private PositionRotation transformInactive;
+	[SerializeField]
+	private List<AudioClip> attackSounds = new List<AudioClip> ();
+	[SerializeField]
+	private List<AudioClip> hitSounds = new List<AudioClip> ();
+
 	[SerializeField]
 	private int damage = 25;
 
 	public WeaponType type;
-
-	GameObject superParent = null;
 
 	private bool attacking = false;
 	public bool Attacking {
@@ -33,17 +37,12 @@ public class MainWeapon : MonoBehaviour {
 		set { attacking = value; }
 	}
 
-    public void Equip(Transform holder) {
-        transform.parent = holder;
-        transform.localPosition = transformActive.position;
-        transform.localRotation = Quaternion.Euler(transformActive.rotation);
-    }
-
-    public void Unequip(Transform holder) {
-        transform.parent = holder;
-        transform.localPosition = transformInactive.position;
-        transform.localRotation = Quaternion.Euler(transformInactive.rotation);
-    }
+	public void Attack() {
+		if (superParent != null && attackSounds.Count > 0) {
+			AudioSource source = superParent.GetComponent<AudioSource> ();
+			source.PlayOneShot (attackSounds [Random.Range (0, attackSounds.Count)]);
+		}
+	}
 
     void NotifyPlayer() {
         Transform superTrans = Utils.GetSuperParent(transform);
@@ -59,15 +58,19 @@ public class MainWeapon : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (attacking && other.gameObject != superParent && other.transform.root != superParent.transform && other.gameObject.tag == "Body") {
-			other.gameObject.SendMessage ("GotHit", damage, SendMessageOptions.DontRequireReceiver);
-		}
-	}
 
-	void OnTriggerExit(Collider other) {
-		//if (other.gameObject.tag == "EnemyBody") {
-			//if (superParent != null) {
-				//superParent.SendMessage("UpdateTarget", other.gameObject);
-			//}
-		//}
+			Vector3 pos = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+			HitInfo info = new HitInfo();
+			info.damage = damage;
+			info.transform.position = pos;
+
+			other.gameObject.SendMessage ("GotHit", info, SendMessageOptions.DontRequireReceiver);
+
+			if (superParent != null && hitSounds.Count > 0) {
+				AudioSource source = superParent.GetComponent<AudioSource> ();
+				source.PlayOneShot (hitSounds [Random.Range (0, hitSounds.Count)]);
+			}
+		}
 	}
 }
